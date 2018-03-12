@@ -1,0 +1,43 @@
+[
+    {
+        "language":"pt",
+        "title":"Cadastrar Regimento",
+        "back":"Home",
+        "name":"Nome*:",
+        "situation":"Situação*:",
+        "description":"Descição:",
+        "save":"Salvar",
+        "cancel":"Cancelar"
+    },
+    {
+        "language":"pt-BR",
+        "title":"Cadastrar Regimento",
+        "back":"Home",
+        "name":"Nome*:",
+        "situation":"Situação*:",
+        "description":"Descição:",
+        "listOfPermission":"Lista de Permissões",
+        "save":"Salvar",
+        "cancel":"Cancelar"
+    },
+    {
+        "language":"en",
+        "title":"Register Regiment",
+        "back":"Home",
+        "name":"Name*:",
+        "situation":"Situation*:",
+        "description":"Desciption:",
+        "save":"Save",
+        "cancel":"Cancel"
+    },
+    {
+        "language":"en-US",
+        "title":"Register Regiment",
+        "back":"Home",
+        "name":"Name*:",
+        "situation":"Situation*:",
+        "description":"Desciption:",
+        "save":"Save",
+        "cancel":"Cancel"
+    }
+]

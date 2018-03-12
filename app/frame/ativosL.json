@@ -1,0 +1,46 @@
+[
+    {
+        "language":"pt",
+        "title":"Ativos",
+        "back":"Home",
+        "save":"Salvar",
+        "opInExecution":"Operações em Execução",
+        "infoInExecution": "Informações da operação",
+        "operationName": "Nome da Operação:",
+        "dateBegin":"Data de Inicio:",
+        "dateEnd":"Data de Término:"
+    },
+    {
+        "language":"pt-BR",
+        "title":"Ativos",
+        "back":"Home",
+        "save":"Salvar",
+        "opInExecution":"Operações em Execução",
+        "infoInExecution": "Informações da operação",
+        "operationName": "Nome da Operação:",
+        "dateBegin":"Data de Inicio:",
+        "dateEnd":"Data de Término:"
+    },
+    {
+        "language":"en",
+        "title":"User registration",
+        "back":"Home",
+        "save":"Save",
+        "opInExecution":"Operation in Execution",
+        "infoInExecution": "Information of operations",
+        "operationName": "Name of Operation:",
+        "dateBegin":"Start Date:",
+        "dateEnd":"End Date:"
+    },
+    {
+        "language":"en-US",
+        "title":"User registration",
+        "back":"Home",
+        "save":"Save",
+        "opInExecution":"Operation in Execution",
+        "infoInExecution": "Information of operations",
+        "operationName": "Name of Operation:",
+        "dateBegin":"Start Date:",
+        "dateEnd":"End Date:"
+    }
+]

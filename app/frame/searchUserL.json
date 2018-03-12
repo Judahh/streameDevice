@@ -1,0 +1,54 @@
+[
+    {
+        "language":"pt",
+        "title":"Pesquisar Usuário",
+        "back":"Home",
+        "fname":"Nome Completo:",
+        "fname2":"Nome Completo",
+        "nickname":"Apelido:",
+        "nickname2":"Apelido",
+        "situation":"Situação:",
+        "search":"Pesquisar",
+        "listUsers":"Lista de Usuários",
+        "cancel":"Cancelar"
+    },
+    {
+        "language":"pt-BR",
+        "title":"Pesquisar Usuário",
+        "back":"Home",
+        "fname":"Nome Completo:",
+        "fname2":"Nome Completo",
+        "nickname":"Apelido:",
+        "nickname2":"Apelido",
+        "situation":"Situação:",
+        "search":"Pesquisar",
+        "listUsers":"Lista de Usuários",
+        "cancel":"Cancelar"
+    },
+    {
+        "language":"en",
+        "title":"Search User",
+        "back":"Home",
+        "fname":"Full name:",
+        "fname2":"Full name",
+        "nickname":"Nickname:",
+        "nickname2":"Nickname",
+        "situation":"Situation:",
+        "search":"Search",
+        "listUsers":"List of Users",
+        "cancel":"Cancel"
+    },
+    {
+        "language":"en-US",
+        "title":"Search User",
+        "back":"Home",
+        "fname":"Full name:",
+        "fname2":"Full name",
+        "nickname":"Nickname:",
+        "nickname2":"Nickname",
+        "situation":"Situation:",
+        "search":"Search",
+        "listUsers":"List of Users",
+        "cancel":"Cancel"
+    }
+]

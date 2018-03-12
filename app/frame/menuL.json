@@ -1,0 +1,22 @@
+[
+    {
+        "language":"en",
+        "back":"Home",
+        "title":"Menu"
+    },
+    {
+        "language":"en-US",
+        "back":"Home",
+        "title":"Menu"
+    },
+    {
+        "language":"pt-BR",
+        "back":"Home",
+        "title":"Menu"
+    },
+    {
+        "language":"pt",
+        "back":"Home",
+        "title":"Menu"
+    }
+]

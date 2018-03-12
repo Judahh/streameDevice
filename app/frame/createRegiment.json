@@ -1,0 +1,483 @@
+{
+    "background": {
+        "image": {
+            "element": {
+                "style": {
+                    "background-color": "rgba(225, 223, 221,1)",
+                    "opacity": 1,
+                    "visibility": "visible",
+                    "position": "fixed",
+                    "filter": "brightness(100%) grayscale(0%) blur(0px)",
+                    "zIndex": -1000,
+                    "max-width": "inherit",
+                    "max-height": "inherit",
+                    "width": "100%",
+                    "height": "100%"
+                }
+            },
+            "img": {
+                "element": {
+                    "style": {
+                        "width": "100%",
+                        "opacity": 0.1,
+                        "height": "100%"
+                    },
+                    "src": "image/streame.svg"
+                }
+            }
+        }
+    },
+    "arrayDivisor": [
+        {
+            "arrayAuthorization": [
+                {
+                    "code": "UserManegement",
+                    "runFunction": "goToLogin()"
+                }
+            ],
+            "arrayDivisor": [
+                {
+                    "element": {
+                        "style": {
+                            "height": "10px",
+                            "width": "100%",
+                            "display": "block",
+                            "opacity": 1,
+                            "color": "transparent",
+                            "padding": [
+                                5
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "arrayDivisor": [
+                {
+                    "element": {
+                        "style": {
+                            "opacity": 1,
+                            "width": "100%",
+                            "display": "block",
+                            "color": "transparent",
+                            "margin-top": "20px",
+                            "margin-left": "15px",
+                            "padding": [
+                                5
+                            ]
+                        }
+                    },
+                    "arrayDivisor": [
+                        {
+                            "arrayItem": [
+                                {
+                                    "element": {
+                                        "style": {
+                                            "display": "block",
+                                            "float": "left",
+                                            "width": "100%",
+                                            "text-align": "center",
+                                            "margin": "1px 0px"
+                                        }
+                                    },
+                                    "colorEffect": {
+                                        "element": {
+                                            "style": {
+                                                "color": "black"
+                                            }
+                                        },
+                                        "font": {
+                                            "element": {
+                                                "className": "ClassOpenSans",
+                                                "style": {
+                                                    "width": "100%",
+                                                    "font-size": "2vw",
+                                                    "text-align": "center",
+                                                    "padding": [
+                                                        0
+                                                    ]
+                                                }
+                                            },
+                                            "animationEffect": {
+                                                "element": {
+                                                    "style": {
+                                                        "display": "block"
+                                                    }
+                                                },
+                                                "animationSubEffect": {
+                                                    "arrayAnimationSubEffectHolder": [
+                                                        {
+                                                            "information": {
+                                                                "information": "title",
+                                                                "element": {
+                                                                    "style": {
+                                                                        "vertical-align": "sub"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "__comment": "Inicio 1 divisor",
+            "element": {
+                "style": {
+                    "display": "inline-block",
+                    "width": "90%",
+                    "float": "none",
+                    "background-color": "rgba(255, 255, 255, 0.3)",
+                    "margin": "5px 5% 5px 5%",
+                    "padding": "0px 5px 0px 5px",
+                    "opacity": 1,
+                    "border-style": "groove"
+                }
+            },
+            "arrayDivisor": [
+                {
+                    "__comment": "Inicio 2 divisor",
+                    "element": {
+                        "style": {
+                            "display": "block",
+                            "width": "100%",
+                            "height": "100%",
+                            "float": "left",
+                            "background-color": "rgba(255, 255, 255, 0.3)",
+                            "margin": "2px 0px",
+                            "padding": "0px 5px 0px 5px",
+                            "opacity": 0.9
+                        }
+                    },
+                    "arrayDivisor": [
+                        {
+                            "__comment": "Inicio 3 divisor",
+                            "element": {
+                                "style": {
+                                    "display": "block",
+                                    "width": "100%",
+                                    "float": "none"
+                                }
+                            },
+                            "arrayDivisor": [
+                                {
+                                    "arrayItem": [
+                                        {
+                                            "element": {
+                                                "style": {
+                                                    "padding-left": "10px",
+                                                    "padding-top": "6px",
+                                                    "display": "inline-block",
+                                                    "float": "none",
+                                                    "width": "20%"
+                                                }
+                                            },
+                                            "colorEffect": {
+                                                "element": {
+                                                    "style": {
+                                                        "color": "black"
+                                                    }
+                                                },
+                                                "font": {
+                                                    "element": {
+                                                        "className": "ClassOpenSans",
+                                                        "style": {
+                                                            "width": "100%",
+                                                            "height": "100%",
+                                                            "font-size": "16px",
+                                                            "padding": [
+                                                                0
+                                                            ]
+                                                        }
+                                                    },
+                                                    "animationEffect": {
+                                                        "element": {
+                                                            "style": {
+                                                                "display": "inline-block"
+                                                            }
+                                                        },
+                                                        "animationSubEffect": {
+                                                            "arrayAnimationSubEffectHolder": [
+                                                                {
+                                                                    "information": {
+                                                                        "information": "name",
+                                                                        "element": {}
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "arrayDataInput": [
+                                        {
+                                            "element": {
+                                                "style": {
+                                                    "display": "inline-block",
+                                                    "color": "black",
+                                                    "opacity": 0.8,
+                                                    "font-size": "25px",
+                                                    "padding": "0px",
+                                                    "margin": "0px 5px 0px 5px",
+                                                    "width": "50%",
+                                                    "padding-left": "20px"
+                                                }
+                                            },
+                                            "arrayTextField": [
+                                                {}
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "__comment__": "Fim 3 divisor"
+                        },
+                        {
+                            "__comment": "Inicio 3 divisor",
+                            "element": {
+                                "style": {
+                                    "display": "block",
+                                    "width": "100%",
+                                    "float": "none"
+                                }
+                            },
+                            "arrayDivisor": [
+                                {
+                                    "arrayItem": [
+                                        {
+                                            "element": {
+                                                "style": {
+                                                    "padding-left": "10px",
+                                                    "display": "block",
+                                                    "float": "left",
+                                                    "width": "20%"
+                                                }
+                                            },
+                                            "colorEffect": {
+                                                "element": {
+                                                    "style": {
+                                                        "color": "black"
+                                                    }
+                                                },
+                                                "font": {
+                                                    "element": {
+                                                        "className": "ClassOpenSans",
+                                                        "style": {
+                                                            "width": "100%",
+                                                            "height": "100%",
+                                                            "font-size": "16px",
+                                                            "padding": [
+                                                                0
+                                                            ]
+                                                        }
+                                                    },
+                                                    "animationEffect": {
+                                                        "element": {
+                                                            "style": {
+                                                                "display": "inline-block"
+                                                            }
+                                                        },
+                                                        "animationSubEffect": {
+                                                            "arrayAnimationSubEffectHolder": [
+                                                                {
+                                                                    "information": {
+                                                                        "information": "description",
+                                                                        "element": {}
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "arrayDataInput": [
+                                        {
+                                            "element": {
+                                                "style": {
+                                                    "display": "inline-block",
+                                                    "color": "black",
+                                                    "opacity": 0.8,
+                                                    "font-size": "25px",
+                                                    "padding": "0px",
+                                                    "margin": "0px 5px 0px 5px",
+                                                    "width": "50%",
+                                                    "padding-left": "20px"
+                                                }
+                                            },
+                                            "arrayTextArea": [
+                                                {}
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "__comment__": "Fim 3 divisor"
+                        }
+                    ],
+                    "__comment__": "Fim 2 divisor"
+                }
+            ],
+            "__comment__": "Fim 1 divisor"
+        },
+        {
+            "__comment": "Inicio 1 divisor",
+            "element": {
+                "style": {
+                    "display": "inline-block",
+                    "width": "90%",
+                    "float": "none",
+                    "background-color": "rgba(255, 255, 255, 0.1)",
+                    "margin": "5px 5% 5px 5%",
+                    "padding": "0px 5px 0px 5px",
+                    "opacity": 1
+                }
+            },
+            "arrayDivisor": [
+                {
+                    "__comment": "Inicio 2 divisor",
+                    "element": {
+                        "style": {
+                            "display": "block",
+                            "width": "100%",
+                            "height": "100%",
+                            "float": "left",
+                            "margin": "2px 0px",
+                            "padding": "5px",
+                            "opacity": 0.9
+                        }
+                    },
+                    "arrayDivisor": [
+                        {
+                            "__comment": "Inicio 3 divisor",
+                            "element": {
+                                "style": {
+                                    "display": "block",
+                                    "width": "100%",
+                                    "float": "none"
+                                }
+                            },
+                            "arrayDivisor": [
+                                {
+                                    "arrayItem": [
+                                        {
+                                            "element": {
+                                                "style": {
+                                                    "padding": "10px",
+                                                    "display": "inline-block",
+                                                    "float": "none",
+                                                    "width": "100px",
+                                                    "border-style": "groove"
+                                                }
+                                            },
+                                            "colorEffect": {
+                                                "element": {
+                                                    "style": {
+                                                        "color": "black"
+                                                    }
+                                                },
+                                                "font": {
+                                                    "element": {
+                                                        "className": "ClassOpenSans",
+                                                        "style": {
+                                                            "width": "100%",
+                                                            "height": "100%",
+                                                            "font-size": "16px",
+                                                            "padding": [
+                                                                0
+                                                            ]
+                                                        }
+                                                    },
+                                                    "animationEffect": {
+                                                        "element": {
+                                                            "style": {
+                                                                "display": "inline-block"
+                                                            }
+                                                        },
+                                                        "animationSubEffect": {
+                                                            "arrayAnimationSubEffectHolder": [
+                                                                {
+                                                                    "information": {
+                                                                        "information": "save",
+                                                                        "element": {}
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "element": {
+                                                "style": {
+                                                    "padding": "10px",
+                                                    "display": "inline-block",
+                                                    "float": "none",
+                                                    "width": "100px",
+                                                    "border-style": "groove"
+                                                }
+                                            },
+                                            "colorEffect": {
+                                                "element": {
+                                                    "style": {
+                                                        "color": "black"
+                                                    }
+                                                },
+                                                "font": {
+                                                    "element": {
+                                                        "className": "ClassOpenSans",
+                                                        "style": {
+                                                            "width": "100%",
+                                                            "height": "100%",
+                                                            "font-size": "16px",
+                                                            "padding": [
+                                                                0
+                                                            ]
+                                                        }
+                                                    },
+                                                    "animationEffect": {
+                                                        "element": {
+                                                            "style": {
+                                                                "display": "inline-block"
+                                                            }
+                                                        },
+                                                        "animationSubEffect": {
+                                                            "arrayAnimationSubEffectHolder": [
+                                                                {
+                                                                    "information": {
+                                                                        "information": "cancel",
+                                                                        "element": {}
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ],
+                            "__comment__": "Fim 3 divisor"
+                        }
+                    ],
+                    "__comment__": "Fim 2 divisor"
+                }
+            ],
+            "__comment__": "Fim 1 divisor"
+        }
+    ]
+}

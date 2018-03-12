@@ -1,0 +1,58 @@
+[
+    {
+        "language":"pt",
+        "title":"Pesquisar Grupos",
+        "back":"Home",
+        "gname":"Grupo:",
+        "gname2":"Grupo",
+        "description":"Descrição:",
+        "description2":"Descrição",
+        "listOfPermission":"Lista de Permissões:",
+        "listOfPermission2":"Lista de Permissões",
+        "search":"Buscar",
+        "save":"Salvar",
+        "listGroups":"Lista de Grupos"
+    },
+    {
+        "language":"pt-BR",
+        "title":"Pesquisar Grupos",
+        "back":"Home",
+        "gname":"Grupo:",
+        "gname2":"Grupo",
+        "description":"Descrição:",
+        "description2":"Descrição",
+        "listOfPermission":"Lista de Permissões:",
+        "listOfPermission2":"Lista de Permissões",
+        "search":"Buscar",
+        "save":"Salvar",
+        "listGroups":"Lista de Grupos"
+    },
+    {
+        "language":"en",
+        "title":"Search Groups",
+        "back":"Home",
+        "gname":"Grupo:",
+        "gname2":"Grupo",
+        "description":"Descrição:",
+        "description2":"Descrição",
+        "listOfPermission":"List of Permission:",
+        "listOfPermission2":"List of Permission",
+        "search":"Search",
+        "save":"Save",
+        "listGroups":"List of Groups"
+    },
+    {
+        "language":"en-US",
+        "title":"Search Groups",
+        "back":"Home",
+        "official":"Responsible Officer:",
+        "official2":"Responsible Officer:",
+        "description":"Description:",
+        "description2":"Description",
+        "listOfPermission":"List of Permission:",
+        "listOfPermission2":"List of Permission",
+        "search":"Search",
+        "save":"Save",
+        "listGroups":"List of Groups"
+    }
+]

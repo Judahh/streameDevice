@@ -1,0 +1,42 @@
+[
+    {
+        "language":"pt",
+        "title":"Cadastro de Cargo",
+        "back":"Home",
+        "name":"Nome*:",
+        "situation":"Situação*:",
+        "description":"Descrição:",
+        "save":"Salvar",
+        "cancel":"Cancelar"
+    },
+    {
+        "language":"pt-BR",
+        "title":"Cadastro de Cargo",
+        "back":"Home",
+        "name":"Nome*:",
+        "situation":"Situação*:",
+        "description":"Descrição:",
+        "save":"Salvar",
+        "cancel":"Cancelar"
+    },
+    {
+        "language":"en",
+        "title":"Role Registration",
+        "back":"Home",
+        "name":"Name*:",
+        "situation":"Situation*:",
+        "description":"Desciption:",
+        "save":"Save",
+        "cancel":"Cancel"
+    },
+    {
+        "language":"en-US",
+        "title":"Role Registration",
+        "back":"Home",
+        "name":"Name*:",
+        "situation":"Situation*:",
+        "description":"Desciption:",
+        "save":"Save",
+        "cancel":"Cancel"
+    }
+]

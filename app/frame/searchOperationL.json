@@ -1,0 +1,58 @@
+[
+    {
+        "language":"pt",
+        "title":"Pesquisar Operações Táticas",
+        "back":"Home",
+        "official":"Oficial Responsável:",
+        "official2":"Oficial Responsável:",
+        "participants":"Participantes:",
+        "participants2":"Participantes",
+        "vehicles":"Viaturas:",
+        "vehicles2":"Viaturas",
+        "search":"Buscar",
+        "save":"Salvar",
+        "listOperations":"Lista de Operações"
+    },
+    {
+        "language":"pt-BR",
+        "title":"Pesquisar Operações Táticas",
+        "back":"Home",
+        "official":"Oficial Responsável:",
+        "official2":"Oficial Responsável",
+        "participants":"Participantes:",
+        "participants2":"Participantes",
+        "vehicles":"Viaturas:",
+        "vehicles2":"Viaturas",
+        "search":"Buscar",
+        "save":"Salvar",
+        "listOperations":"Lista de Operações"
+    },
+    {
+        "language":"en",
+        "title":"Search Operation",
+        "back":"Home",
+        "official":"Responsible Officer:",
+        "official2":"Responsible Officer",
+        "participants":"Participants:",
+        "participants2":"Participantes",
+        "vehicles":"vehicles:",
+        "vehicles2":"vehicles",
+        "search":"Search",
+        "save":"Save",
+        "listOperations":"List of Operations"
+    },
+    {
+        "language":"en-US",
+        "title":"Search Operation",
+        "back":"Home",
+        "official":"Responsible Officer:",
+        "official2":"Responsible Officer:",
+        "participants":"Participantes:",
+        "participants2":"Participantes",
+        "vehicles":"Viaturas:",
+        "vehicles2":"vehicles",
+        "search":"Buscar",
+        "save":"Salvar",
+        "listOperations":"List of Operations"
+    }
+]

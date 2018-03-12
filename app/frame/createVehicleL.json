@@ -1,0 +1,62 @@
+[
+    {
+        "language":"pt",
+        "title":"Cadastro de Viatura",
+        "back":"Home",
+        "identify":"Identificador da Viatura*:",
+        "model":"Modelo*:",
+        "manufacturer":"Fabricante*:",
+        "year":"Ano*:",
+        "situation":"Situação:",
+        "motor":"Motor:",
+        "plate":"Placa:",
+        "city":"Cidade:",
+        "save":"Salvar",
+        "cancel":"Cancelar"
+    },
+    {
+        "language":"pt-BR",
+        "title":"Cadastro de Viatura",
+        "back":"Home",
+        "identify":"Identificador da Viatura*:",
+        "model":"Modelo*:",
+        "manufacturer":"Fabricante*:",
+        "year":"Ano*:",
+        "situation":"Situação:",
+        "motor":"Motor:",
+        "plate":"Placa:",
+        "city":"Cidade:",
+        "save":"Salvar",
+        "cancel":"Cancelar"
+    },
+    {
+        "language":"en",
+        "title":"Vehicle Registration",
+        "back":"Home",
+        "identify":"Vehicle Identify*:",
+        "model":"Model*:",
+        "manufacturer":"Manufacturer*:",
+        "year":"Year*:",
+        "situation":"Situation:",
+        "motor":"Motor:",
+        "plate":"Plate:",
+        "city":"City:",
+        "save":"Save",
+        "cancel":"Cancel"
+    },
+    {
+        "language":"en-US",
+        "title":"Vehicle Registration",
+        "back":"Home",
+        "identify":"Vehicle Identify*:",
+        "model":"Model*:",
+        "manufacturer":"Manufacturer*:",
+        "year":"Year*:",
+        "situation":"Situation:",
+        "motor":"Motor:",
+        "plate":"Plate:",
+        "city":"City:",
+        "save":"Save",
+        "cancel":"Cancel"
+    }
+]
