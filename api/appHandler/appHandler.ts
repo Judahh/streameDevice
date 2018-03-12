@@ -1,14 +1,62 @@
-import { BasicAppHandler, BasicSocket } from 'backapijh';
+import { Request, Response, NextFunction, BasicAppHandler, BasicSocket } from 'backapijh';
 import { HardwareHandler } from '../hardwareHandler/hardwareHandler';
+import { WebhookConnector } from 'webhookconnector';
 
 export class AppHandler extends BasicAppHandler {
+    private webhookConnector: WebhookConnector;
 
-    constructor(hardwareHandler: HardwareHandler) {
+    constructor(hardwareHandler: HardwareHandler, webhookConnector: WebhookConnector) {
         super(hardwareHandler);
+        this.webhookConnector = webhookConnector;
     }
 
     // tslint:disable-next-line:no-empty
     public init() { }
+
+    public getUptime(socket) {
+        this.hardwareHandler.getUptime((uptime) => {
+            socket.emit('uptime', uptime);
+        });
+    }
+
+    public getCaptcha(socket) {
+        this.hardwareHandler.getCaptcha((captcha) => {
+            socket.captchaText = captcha.text;
+            socket.emit('captcha', captcha.data);
+        });
+    }
+
+    public checkCaptcha(socket, text) {
+        // console.log('text', text);
+        // console.log('captchaText', socket.captchaText);
+        socket.emit('captchaChecked', (socket.captchaText === text));
+    }
+
+    public getSpace() {
+        this.hardwareHandler.getSpace();
+    }
+
+    public getVideos() {
+        this.hardwareHandler.getVideos();
+    }
+
+    public uploadVideo(video) {
+        this.hardwareHandler.uploadVideo(video);
+    }
+
+    public getWifiConnections() {
+        this.hardwareHandler.getWifiConnections();
+    }
+
+    public getWifiConnected() {
+        this.hardwareHandler.getWifiConnected();
+    }
+
+    public subscribeDisk(socket) {
+        this.hardwareHandler.subscribeDisk((data) => {
+            socket.emit('disk', data);
+        });
+    }
 
     public subscribeGPS(socket) {
         this.hardwareHandler.subscribeGPS((data) => {
@@ -28,79 +76,61 @@ export class AppHandler extends BasicAppHandler {
         });
     }
 
-    public subscribeDisk(socket) {
-        this.hardwareHandler.subscribeDisk((data) => {
-            socket.emit('disk', data);
+    public checkIsOnline(socket) {
+        this.hardwareHandler.checkIsOnline((online) => {
+            socket.emit('online', online);
         });
     }
 
-    public subscribeNewDevice(socket) {
-        this.hardwareHandler.subscribeNewDevice((data) => {
-            socket.emit('newDevice', data);
-        });
+    public setWifiConnection(data) {
+        let _self = this;
+        this.hardwareHandler.setWifiConnection(data);
     }
 
-    public subscribeDevices(socket) {
-        this.hardwareHandler.subscribeDevices((data) => {
-            socket.emit('devices', data);
-        });
+    public appPublish(subscribers, data) {
+        this.hardwareHandler.appPublish(subscribers, data);
     }
 
-    public getVideos() {
-        this.hardwareHandler.getVideos();
-    }
-
-    public externalPublish(subscribers, data) {
-        this.hardwareHandler.externalPublish(subscribers, data);
-    }
-
-    public externalSubscribe(subscribers, socket) {
-        this.hardwareHandler.externalSubscribe(subscribers, (data) => {
+    public appSubscribe(subscribers, socket) {
+        this.hardwareHandler.appSubscribe(subscribers, (data) => {
             socket.emit(subscribers, data);
         });
     }
 
-    public devicePublish(device, subscribers, data) {
-        this.hardwareHandler.devicePublish(device, subscribers, data);
-    }
-
-    public deviceSubscribe(device, subscribers, socket) {
-        this.hardwareHandler.deviceSubscribe(device, subscribers, (data) => {
-            socket.emit(subscribers, data);
-        });
-    }
-
-    public externalSubscribeStream(subscribers, socket) {
-        this.hardwareHandler.externalSubscribe(subscribers, (data) => {
+    public appSubscribeStream(subscribers, socket) {
+        this.hardwareHandler.appSubscribe(subscribers, (data) => {
             socket.emit('stream', data);
         });
     }
 
-    public configSocket(socketBasic: BasicSocket) {
-        let _self = this;
-
-        socketBasic.on('getVideos', () => { _self.getVideos(); });
-        socketBasic.on('subscribeGPS', () => { _self.subscribeGPS(socketBasic); });
-        socketBasic.on('subscribeGSM', () => { _self.subscribeGSM(socketBasic); });
-        socketBasic.on('subscribeWifi', () => { _self.subscribeWifi(socketBasic); });
-        socketBasic.on('subscribe', () => { _self.subscribeWifi(socketBasic); });
-
-        socketBasic.on('signUp', (user) => { _self.hardwareHandler.signUp(user, socketBasic); });
-        socketBasic.on('signIn', (user) => { _self.hardwareHandler.signIn(user, socketBasic); });
-
-        socketBasic.on('subscribeStream', () => { _self.externalSubscribeStream('streamOut', socketBasic); });
-        socketBasic.on('stream', (stream) => { _self.externalPublish('streamIn', stream); });
-
-        socketBasic.on('subscribeDisk', () => { _self.subscribeDisk(socketBasic); });
-
-        socketBasic.on('subscribeNewDevice', () => { _self.subscribeNewDevice(socketBasic); });
-        socketBasic.on('getUsers', () => { _self.hardwareHandler.getUsers(socketBasic); });
-
-        socketBasic.on('setUsers', (data) => { _self.hardwareHandler.setUsers(data.device, data.users); });
-        socketBasic.on('addUser', (data) => { _self.hardwareHandler.addUser(data.device, data.user); });
-        socketBasic.on('removeUser', (data) => { _self.hardwareHandler.removeUser(data.device, data.user); });
-
-        socketBasic.on('getDevices', () => { _self.hardwareHandler.getDevices(); });
+    public refresh(request: Request, response: Response, nextFunction: NextFunction) {
+        this.webhookConnector.upgrade(request.body);
     }
 
+    public configSocket(basicSocket: BasicSocket) {
+        let _self = this;
+        basicSocket.on('getUptime', () => { _self.getUptime(basicSocket); });
+        basicSocket.on('getCaptcha', () => { _self.getCaptcha(basicSocket); });
+        basicSocket.on('checkCaptcha', (text) => { _self.checkCaptcha(basicSocket, text); });
+
+        basicSocket.on('getSpace', () => { _self.getSpace(); });
+
+        basicSocket.on('subscribeStream', () => { _self.appSubscribeStream('streamOut', basicSocket); });
+        basicSocket.on('stream', (stream) => { _self.appPublish('streamIn', stream); });
+
+
+        basicSocket.on('uploadVideo', (video) => { _self.uploadVideo(video); });
+        basicSocket.on('getVideos', () => { _self.getVideos(); });
+        basicSocket.on('subscribeDisk', () => { _self.subscribeDisk(basicSocket); });
+
+        basicSocket.on('subscribeGPS', () => { _self.subscribeGPS(basicSocket); });
+        basicSocket.on('subscribeGSM', () => { _self.subscribeGSM(basicSocket); });
+
+        basicSocket.on('checkIsOnline', () => { _self.checkIsOnline(basicSocket); });
+
+        basicSocket.on('getWifiConnected', () => { _self.getWifiConnected(); });
+        basicSocket.on('getWifiConnections', () => { _self.getWifiConnections(); });
+        basicSocket.on('setWifiConnection', (data) => { _self.setWifiConnection(data); });
+        basicSocket.on('subscribeWifi', () => { _self.subscribeWifi(basicSocket); });
+    }
 }

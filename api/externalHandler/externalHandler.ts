@@ -1,105 +1,126 @@
 import { path, BasicApi, BasicExternalHandler, BasicSocket } from 'backapijh';
 import { HardwareHandler } from '../hardwareHandler/hardwareHandler';
+// import { compile } from 'morgan';
 
 export class ExternalHandler extends BasicExternalHandler {
 
     constructor(hardwareHandler: HardwareHandler) {
         super(hardwareHandler);
-        this.hardwareHandler.setExternalHandler(this);
+        this.hardwareHandler = hardwareHandler;
+    }
+
+    public init() {
+        this.connectToServer(process.env.SERVER_ADDRESS, HardwareHandler.getIdentification());
+    }
+
+    protected clientConnected(basicSocket) {
+        console.log('ID:', basicSocket.getIdentification());
+        console.log('CONNECTED');
+        basicSocket.emit('subscribeStream', {});
+        basicSocket.emit('subscribeUser', {});
+        basicSocket.emit('subscribeRemoveUser', {});
+        basicSocket.emit('subscribeUsers', {});
+    }
+
+    public getUptime(socket) {
+        this.hardwareHandler.getUptime((uptime) => {
+            socket.emit('uptime', uptime);
+        });
+    }
+
+    public getWifiConnections(socket) {
+        this.hardwareHandler.getWifiConnections();
+    }
+
+    public getWifiConnected(socket) {
+        this.hardwareHandler.getWifiConnected();
+    }
+
+    public getVideos() {
+        this.hardwareHandler.getVideos();
     }
 
     public uploadVideo(video) {
         this.hardwareHandler.uploadVideo(video);
     }
 
-    public externalPublish(subscribers, data) {
-        this.hardwareHandler.externalPublish(subscribers, data);
+    public subscribeDisk(socket) {
+        this.hardwareHandler.subscribeDisk((data) => {
+            socket.emit('disk', data);
+        });
     }
 
-    public externalSubscribe(subscribers, socket) {
-        this.hardwareHandler.externalSubscribe(subscribers, (data) => {
+    public subscribeGPS(socket) {
+        this.hardwareHandler.subscribeGPS((data) => {
+            socket.emit('gPS', data);
+        });
+    }
+
+    public subscribeGSM(socket) {
+        this.hardwareHandler.subscribeGSM((data) => {
+            socket.emit('gsm', data);
+        });
+    }
+
+    public subscribeWifi(socket) {
+        this.hardwareHandler.subscribeWifi((data) => {
+            socket.emit('wifi', data);
+        });
+    }
+
+    public checkIsOnline(socket) {
+        this.hardwareHandler.checkIsOnline((online) => {
+            socket.emit('online', online);
+        });
+    }
+
+    public setWifiConnection(data) {
+        let _self = this;
+        this.hardwareHandler.setWifiConnection(data);
+    }
+
+    public appPublish(subscribers, data) {
+        this.hardwareHandler.appPublish(subscribers, data);
+    }
+
+    public appSubscribe(subscribers, socket) {
+        this.hardwareHandler.appSubscribe(subscribers, (data) => {
             socket.emit(subscribers, data);
         });
     }
 
-    public externalSubscribeStream(subscribers, socket) {
-        this.hardwareHandler.externalSubscribe(subscribers, (data) => {
+    public appSubscribeStream(subscribers, socket) {
+        this.hardwareHandler.appSubscribe(subscribers, (data) => {
             socket.emit('stream', data);
         });
     }
 
-    public devicePublish(device, subscribers, data) {
-        this.hardwareHandler.devicePublish(device, subscribers, data);
-    }
-
-    public deviceSubscribe(device, subscribers, socket) {
-        this.hardwareHandler.deviceSubscribe(device, subscribers, (data) => {
-            socket.emit(subscribers, data);
-        });
-    }
-
-    public getDevices() {
-        for (let index = 0; index < this.arraySocket.length; index++) {
-            let socketBasic = this.arraySocket[index];
-            socketBasic.emit('getUsers', {});
-        }
-    }
-
-    public users(socketBasic, users) {
-        let identification = socketBasic.getIdentification();
-        this.externalPublish('newDevice', { identification: identification, users: users });
-    }
-
-    protected serverConnected(socketBasic) {
-        console.log('ID:', socketBasic.getIdentification());
-        socketBasic.emit('subscribeGPS', {});
-        socketBasic.emit('subscribeGSM', {});
-        socketBasic.emit('subscribeWifi', {});
-        socketBasic.emit('subscribeStream', {});
-        socketBasic.emit('subscribeDisk', {});
-        socketBasic.emit('getUsers', {});
-    }
-
-    public configSocket(socketBasic: BasicSocket) {
+    protected configSocketClient(basicSocket: BasicSocket) {
         let _self = this;
-        socketBasic.on('online', (online) => {
-            _self.externalPublish('online', online);
-        });
-        socketBasic.on('gSM', (data) => {
-            _self.externalPublish('gSM', data);
-        });
-        socketBasic.on('gPS', (data) => {
-            _self.externalPublish('gPS', data);
-        });
-        socketBasic.on('wifi', (data) => {
-            _self.externalPublish('wifi', data);
-        });
-        socketBasic.on('stream', (data) => {
-            _self.externalPublish('streamOut', data);
-        });
-        socketBasic.on('subscribeStream', () => {
-            _self.externalSubscribe('streamIn', socketBasic);
-        });
-        socketBasic.on('subscribeUser', () => {
-            _self.deviceSubscribe(socketBasic.getIdentification().serialNumber, 'user', socketBasic);
-        });
-        socketBasic.on('subscribeRemoveUser', () => {
-            _self.deviceSubscribe(socketBasic.getIdentification().serialNumber, 'removeUser', socketBasic);
-        });
-        socketBasic.on('subscribeUsers', () => {
-            _self.deviceSubscribe(socketBasic.getIdentification().serialNumber, 'users', socketBasic);
-        });
+        basicSocket.on('getUptime', () => { _self.getUptime(basicSocket); });
 
-        socketBasic.on('disk', (data) => {
-            _self.uploadVideo(data.upload);
-        });
+        basicSocket.on('uploadVideo', (video) => { _self.uploadVideo(video); });
+        basicSocket.on('getVideos', () => { _self.getVideos(); });
+        basicSocket.on('subscribeDisk', () => { _self.subscribeDisk(basicSocket); });
 
-        socketBasic.on('users', (users) => {
-            _self.users(socketBasic, users);
-        });
+        basicSocket.on('subscribeGPS', () => { _self.subscribeGPS(basicSocket); });
 
-        // console.log(socketBasic.getIdentification());
-        // _self.externalPublish('newDevice', _self.getFullIdentification(socketBasic));
-        // this.io.on()
+        basicSocket.on('subscribeGSM', () => { _self.subscribeGSM(basicSocket); });
+
+        basicSocket.on('checkIsOnline', () => { _self.checkIsOnline(basicSocket); });
+
+        basicSocket.on('subscribeWifi', () => { _self.subscribeWifi(basicSocket); });
+        basicSocket.on('getWifiConnected', () => { _self.getWifiConnected(basicSocket); });
+        basicSocket.on('getWifiConnections', () => { _self.getWifiConnections(basicSocket); });
+        basicSocket.on('setWifiConnection', (data) => { _self.setWifiConnection(data); });
+
+        basicSocket.on('user', (user) => { _self.hardwareHandler.addUser(user); });
+        basicSocket.on('removeUser', (user) => { _self.hardwareHandler.removeUser(user); });
+        basicSocket.on('users', (users) => { _self.hardwareHandler.setUsers(users); });
+        basicSocket.on('getUsers', () => { _self.hardwareHandler.getUsers(basicSocket); });
+
+
+        basicSocket.on('subscribeStream', () => { _self.appSubscribeStream('streamIn', basicSocket); });
+        basicSocket.on('streamIn', (data) => { _self.appPublish('streamOut', data); });
     }
 }

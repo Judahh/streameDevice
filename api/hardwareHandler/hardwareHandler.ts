@@ -1,87 +1,92 @@
+import { GPS } from './../gPS/gPS';
+import { GSM } from './../gSM/gSM';
+import { Wifi } from './../wifi/wifi';
 import { Disk } from './../disk/disk';
-import { Handler, Event, Operation, Database } from 'flexiblepersistence';
-import { User } from '../user/user';
-import { Authentication } from '../user/authentication';
-import { Permission } from '../user/permission';
-import { ExternalHandler } from '../externalHandler/externalHandler';
+// import { I2C } from './../i2c/i2c';
+import { Parsers } from './../parser/parsers';
+import { Identification } from './identification';
+import { Handler, Event, Operation } from 'flexiblepersistence';
+// import { Camera } from './../camera/camera';
+
+import * as uptime from 'os-uptime';
+import * as  svgCaptcha from 'svg-captcha';
+import * as isOnline from 'is-online';
+import { connection } from 'mongoose';
 import { BasicHardwareHandler } from 'backapijh';
-// let packageJson = require('./../package.json');
+
 
 export class HardwareHandler extends BasicHardwareHandler {
+    private static identification: Identification = new Identification();
+    private gPS: GPS;
+    private gSM: GSM;
+    private wifi: Wifi;
     private disk: Disk;
-    private externalSubscribers: any;
-    private externalSubscribersOldData: any;
-    private deviceSubscribers: any;
+    private parsers: Parsers;
     private handler: Handler;
-    private externalHandler: ExternalHandler;
+    private appSubscribers: any;
+
+    public static getIdentification() {
+        return HardwareHandler.identification;
+    }
 
     constructor() {
         super();
-        this.disk = new Disk();
-        this.deviceSubscribers = {};
-        this.externalSubscribers = {};
-        this.externalSubscribersOldData = {};
-
-        let database = new Database(process.env.STREAME_READ_DB, process.env.STREAME_READ_DB_HOST,
-            parseInt(process.env.STREAME_READ_DB_PORT, 10), process.env.STREAME_DB,
-            process.env.STREAME_DB);
-        let database2 = new Database(process.env.STREAME_EVENT_DB, process.env.STREAME_EVENT_DB_HOST,
-            parseInt(process.env.STREAME_EVENT_DB_PORT, 10), process.env.STREAME_DB,
-            process.env.STREAME_DB);
-        this.handler = new Handler(database, database2);
-    }
-
-    public getExternalHandler() {
-        return this.externalHandler;
-    }
-
-    public setExternalHandler(externalHandler: ExternalHandler) {
-        this.externalHandler = externalHandler;
+        this.parsers = Parsers.getInstance();
+        this.handler = new Handler(process.env.HORUS_DB, process.env.HORUS_DB_HOST,
+            parseInt(process.env.HORUS_DB_PORT, 10));
+        this.gPS = new GPS(this.parsers.getParser(process.env.GPS_NMEA_SERIAL_PORT),
+        this.parsers.getParser(process.env.GPS_AT_SERIAL_PORT), process.env.GPS_AT_COMMAND_INIT,
+        process.env.GPS_AT_COMMAND_START, this.handler);
+        this.gSM = new GSM(this.parsers.getParser(process.env.GSM_AT_SERIAL_PORT),
+        process.env.GSM_AT_COMMAND_SIGNAL, process.env.GSM_AT_COMMAND_TYPE, parseInt(process.env.GSM_AT_COMMAND_DELAY, 10), this.handler);
+        this.wifi = new Wifi(parseInt(process.env.WIFI_REFRESH_DELAY, 10), this.handler);
+        this.disk = new Disk(this.handler);
+        // HANDLER SAMPLE
+        // this.handler.addEvent(new Event(Operation.add, 'sample', 0));
+        // this.handler.readArray('samples',(error, result: Array<any>)=>{});
+        // this.handler.readById('samples', 0,(error, result: Array<any>)=>{});
+        // this.handler.readOne('samples', 0,(error, result: Array<any>)=>{});
+        // this.getCaptcha();
+        this.appSubscribers = {};
+        // try {
+        //     let i2c = new I2C(0x77);
+        // } catch (error) {
+        //     console.error(error);
+        // }
     }
 
     // tslint:disable-next-line:no-empty
     public init() { }
 
-    public addUser(device, user) {
-        let _self = this;
-        this.handler.readArray('user', { 'username': user }, (error, data) => {
-            for (let index = 0; index < data.length; index++) {
-                let element: User = JSON.parse(JSON.stringify(data[index])); // JSON.parse(data[index])
-                _self.devicePublish(device, 'user', element);
-            }
-        });
+    public addUser(user) {
+        let event = new Event(Operation.add, 'user', user);
+        this.handler.addEvent(event);
     }
 
-    public removeUser(device, user) {
-        let _self = this;
-        this.handler.readArray('user', { 'username': user }, (error, data) => {
-            for (let index = 0; index < data.length; index++) {
-                let element: User = JSON.parse(JSON.stringify(data[index])); // JSON.parse(data[index])
-                // console.log('index', index);
-                _self.devicePublish(device, 'removeUser', element);
-            }
-        });
+    public removeUser(user) {
+        console.log('REMOVES');
+        let event = new Event(Operation.delete, 'user', user);
+        this.handler.addEvent(event);
     }
 
-    public setUsers(device, user) {
-        let _self = this;
-        this.handler.readArray('user', { 'username': user }, (error, data) => {
-            let arrayUsers: Array<any> = new Array<any>();
-            for (let index = 0; index < data.length; index++) {
-                let element: User = JSON.parse(JSON.stringify(data[index])); // JSON.parse(data[index])
-                arrayUsers.push(element);
-            }
-            _self.devicePublish(device, 'users', arrayUsers);
-        });
+    public addUsers(users) {
+        for (let index = 0; index < users.length; index++) {
+            let user = users[index];
+            this.addUser(user);
+        }
     }
 
-    public getDevices() {
-        this.externalHandler.getDevices();
+    public setUsers(users) {
+        let _self = this;
+        this.handler.readArray('user', (error, data) => {
+            _self.clearUsers(data);
+            _self.addUsers(users);
+        });
     }
 
     public getUsers(socket) {
         let _self = this;
-        this.handler.readArray('user', {}, (error, data) => {
+        this.handler.readArray('user', (error, data) => {
             _self.returnUsers(data, socket);
         });
     }
@@ -89,88 +94,15 @@ export class HardwareHandler extends BasicHardwareHandler {
     public returnUsers(data, socket) {
         let users: Array<any> = new Array<any>();
         for (let index = 0; index < data.length; index++) {
-            let element: User = JSON.parse(JSON.stringify(data[index])); // JSON.parse(data[index])
-            delete element.authentication.passwordHash;
-            delete element.authentication.salt;
-            users.push(element);
+            let element = JSON.parse(JSON.stringify(data[index]));//JSON.parse(data[index])
+            users.push(element.authentication.username);
         }
         // console.log('ERROR')
         socket.emit('users', users);
     }
 
-    public signUp(user, socket) {
-        let _self = this;
-        if (socket.identification.user !== undefined) {
-            if (user.authentication.permission > socket.identification.user.authentication.permission) {
-                user.authentication.permission = socket.identification.user.authentication.permission
-            }
-        } else {
-            user.authentication.permission = Permission.User;
-        }
-
-        let newUser = new User(
-            user.username,
-            user.name,
-            user.nickname,
-            user.mother,
-            user.father,
-            user.uId,
-            user.uIdEmitter,
-            user.uIdState,
-            user.nUId,
-            user.birth,
-            user.birthState,
-            user.nationality,
-            user.email,
-            user.role,
-            new Authentication(
-                user.authentication.password,
-                user.authentication.permission));
-        newUser.arrayAddress = user.arrayAddress;
-        newUser.arrayPhone = user.arrayPhone;
-        this.handler.readArray('user', { 'username': newUser.username }, (error, data) => {
-            _self.signUpCheck(newUser, data, socket);
-        });
-
-    }
-
-    public signUpCheck(user, data, socket) {
-        console.log(user);
-        if (data.length > 0) {
-            socket.emit('userManegement', {});
-        } else {
-            let event = new Event(Operation.add, 'user', user);
-            this.handler.addEvent(event);
-            socket.emit('userManegement', { user: user });
-        }
-
-    }
-
-    public signIn(user, socket) {
-        let _self = this;
-        this.handler.readArray('user', { 'username': user.username }, (error, data) => {
-            _self.signInCheck(user, data, socket);
-        });
-    }
-
-    public signInCheck(user, data, socket) {
-        console.log(user);
-        for (let index = 0; index < data.length; index++) {
-            console.log(user);
-            let element = JSON.parse(JSON.stringify(data[index])); // JSON.parse(data[index])
-            let hash = Authentication.generatePasswordHashFromSalt(user.password, element.authentication.salt);
-            if (element.authentication.passwordHash === hash.passwordHash) {
-                let logged = element;
-                delete logged.authentication.passwordHash;
-                delete logged.authentication.salt;
-                socket.identification.user = logged;
-                socket.identification.device = user.device;
-                socket.emit('userManegement', { user: logged });
-                return;
-            }
-        }
-        // console.log('ERROR')
-        socket.emit('userManegement', {});
+    public getSpace() {
+        this.disk.getSpace();
     }
 
     public getVideos() {
@@ -179,6 +111,18 @@ export class HardwareHandler extends BasicHardwareHandler {
 
     public uploadVideo(video) {
         this.disk.uploadVideo(video);
+    }
+
+    public getWifiConnections() {
+        this.wifi.scan();
+    }
+
+    public getWifiConnected() {
+        this.wifi.getCurrentConnections();
+    }
+
+    public setWifiConnection(data) {
+        this.wifi.connect(data);
     }
 
     public subscribeDisk(callback) {
@@ -190,104 +134,113 @@ export class HardwareHandler extends BasicHardwareHandler {
 
     public subscribeGPS(callback) {
         let _self = this;
-        this.externalSubscribe('gPS', (data) => {
+        this.gPS.subscribe((data) => {
             callback(data);
         });
     }
 
     public subscribeGSM(callback) {
         let _self = this;
-        this.externalSubscribe('gSM', (data) => {
+        this.gSM.subscribe((data) => {
             callback(data);
         });
     }
 
     public subscribeWifi(callback) {
         let _self = this;
-        this.externalSubscribe('wifi', (data) => {
+        this.wifi.subscribe((data) => {
             callback(data);
         });
     }
 
-    public subscribeNewDevice(callback) {
+    public getUptime(callback) {
+        callback(uptime().toLocaleString());
+    }
+
+    public getCaptcha(callback?) {
+        let color: boolean = (process.env.CAPTCHA_COLOR === '1');
+        let captchaOptions = {
+            size: this.getRandomInt(process.env.CAPTCHA_SIZE_MIN, process.env.CAPTCHA_SIZE_MAX),
+            ignoreChars: process.env.CAPTCHA_IGNORE_CHARS,
+            noise: this.getRandomInt(process.env.CAPTCHA_NOISE_MIN, process.env.CAPTCHA_NOISE_MAX),
+            color: color,
+            background: this.getRandomColor(process.env.CAPTCHA_background_MIN, process.env.CAPTCHA_background_MAX)
+        };
+
+        let captcha = svgCaptcha.create(captchaOptions);
+        // console.log('captcha', captcha);
+        if (callback !== undefined && callback !== null) {
+            callback(captcha);
+        }
+    }
+
+    public checkIsOnline(callback) {
         let _self = this;
-        this.externalSubscribe('newDevice', (data) => {
-            callback(data);
+        isOnline().then((online) => {
+            callback(online);
+        }).fail(() => {
+            callback(false);
         });
     }
 
-    public subscribeDevices(callback) {
-        let _self = this;
-        this.externalSubscribe('devices', (data) => {
-            callback(data);
-        });
-    }
-
-    public externalSubscribe(subscribers, callback) {
-        this.checkExternalSubscribers(subscribers);
-        this.externalSubscribers[subscribers].push(callback);
-        this.externalSubscribersOldData[subscribers].forEach((data) => {
-            callback(data);
-        });
+    public appSubscribe(subscribers, callback) {
+        this.checkAppSubscribers(subscribers);
+        this.appSubscribers[subscribers].push(callback);
         console.log(callback.name, 'has been subscribed to', subscribers);
     }
 
-    public externalUnsubscribe(subscribers, callback) {
-        this.checkExternalSubscribers(subscribers);
-        this.externalSubscribers[subscribers] = this.externalSubscribers[subscribers].filter((element) => {
+    public appUnsubscribe(subscribers, callback) {
+        this.checkAppSubscribers(subscribers);
+        this.appSubscribers[subscribers] = this.appSubscribers[subscribers].filter((element) => {
             return element !== callback;
         });
     }
 
-    public externalPublish(subscribers, data) {
-        this.checkExternalSubscribers(subscribers);
-        this.externalSubscribers[subscribers].forEach((subscriber) => {
-            subscriber(data);
-        });
-        this.externalSubscribersOldData[subscribers].push(data);
-    }
-
-    public deviceSubscribe(device, subscribers, callback) {
-        this.checkDeviceSubscribers(device, subscribers);
-        this.deviceSubscribers[device][subscribers].push(callback);
-        console.log(callback.name, 'has been subscribed to', subscribers);
-    }
-
-    public deviceUnsubscribe(device, subscribers, callback) {
-        this.checkDeviceSubscribers(device, subscribers);
-        this.deviceSubscribers[device][subscribers] = this.deviceSubscribers[device][subscribers].filter((element) => {
-            return element !== callback;
-        });
-    }
-
-    public devicePublish(device, subscribers, data) {
-        this.checkDeviceSubscribers(device, subscribers);
-        this.deviceSubscribers[device][subscribers].forEach((subscriber) => {
+    public appPublish(subscribers, data) {
+        this.checkAppSubscribers(subscribers);
+        this.appSubscribers[subscribers].forEach((subscriber) => {
             subscriber(data);
         });
     }
 
-    private isOperator(socket) {
-        return (socket.identification.user.authentication.permission >= Permission.Operator);
+    public getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
     }
 
-    private isAdministator(socket) {
-        return (socket.identification.user.authentication.permission >= Permission.Administrator);
+    public getRandomColor(min, max) {
+        let minA: Array<string> = min.substr(1).match(/.{1,2}/g);
+        let maxA: Array<string> = max.substr(1).match(/.{1,2}/g);
+        let color = '#';
+
+        for (let index = 0; index < minA.length; index++) {
+            color += this.getRandomColorPart(
+                parseInt('0x' + minA[index]), 
+                parseInt('0x' + maxA[index]));
+        }
+        return color;
     }
 
-    private checkExternalSubscribers(subscribers) {
-        if (this.externalSubscribers[subscribers] === undefined) {
-            this.externalSubscribers[subscribers] = new Array<any>();
-            this.externalSubscribersOldData[subscribers] = new Array<any>();
+
+    public getRandomColorPart(min, max) {
+        let number = this.getRandomInt(min, max);
+        if (number < 16) {
+            return '0' + number.toString(16);
+        }
+        return number.toString(16);
+    }
+
+    private clearUsers(data) {
+        for (let index = 0; index < data.length; index++) {
+            let element = JSON.parse(JSON.stringify(data[index])); // JSON.parse(data[index])
+            this.removeUser(element);
         }
     }
 
-    private checkDeviceSubscribers(device, subscribers) {
-        if (this.deviceSubscribers[device] === undefined) {
-            this.deviceSubscribers[device] = {};
-        }
-        if (this.deviceSubscribers[device][subscribers] === undefined) {
-            this.deviceSubscribers[device][subscribers] = new Array<any>();
+    private checkAppSubscribers(subscribers) {
+        if (this.appSubscribers[subscribers] === undefined) {
+            this.appSubscribers[subscribers] = new Array<any>();
         }
     }
 }
