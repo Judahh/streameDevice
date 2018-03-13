@@ -8,8 +8,8 @@ export class Time extends AppObject {
         super(father);
     }
 
-    public getTime() {
-        // console.log('RUN TIME!!');
+    public getTime(component) {
+        console.log('RUN TIME!!', component);
         let today = new Date();
         let hours = today.getHours();
         let m: number = today.getMinutes();
@@ -21,10 +21,10 @@ export class Time extends AppObject {
             minutes = '' + m;
         }
 
-        if (document.getElementById(this.father.getElement().id) != null) {
-            this.father.getElement().innerHTML = hours + ':' + minutes;
+        if (document.getElementById(component.getElement().id) != null) {
+            component.getElement().innerHTML = hours + ':' + minutes;
             let _self = this;
-            let t = setTimeout(() => { _self.getTime(); }, 5000);
+            let t = setTimeout(() => { _self.getTime(component); }, 5000);
         }
     }
 

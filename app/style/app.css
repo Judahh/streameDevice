@@ -78,7 +78,7 @@
   src: url("fonts/NewIcons/newIcons.ttf")  format('truetype');
   font-weight: normal;
   font-style: normal;
-}
+}*/
 
 @font-face {
   font-family: "MaterialWifi";
@@ -94,7 +94,7 @@
   src: url("fonts/Material-Design-Iconic-Font.woff") format('woff');
   font-weight: normal;
   font-style: normal;
-} */
+} 
 
 @font-face {
     font-family: "FontFuturisticI";

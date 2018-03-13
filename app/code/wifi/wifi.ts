@@ -1,4 +1,5 @@
-import { AppObject, Component, ComponentDataInput, ComponentOption, ComponentInformation, ComponentPageBody, Observer } from 'backappjh';
+import { AppObject, Component, ComponentDataInput, ComponentTextField, ComponentOption, ComponentInformation,
+     ComponentPageBody, Observer, ComponentComboBox } from 'backappjh';
 import { BasicSocket, UniqueSocket } from 'basicsocket';
 
 export class Wifi extends AppObject implements Observer {
@@ -101,15 +102,21 @@ export class Wifi extends AppObject implements Observer {
     }
 
     public connect(component) {
-        // let selectedIndex = (<HTMLSelectElement>(<ComponentDataInput>(<ComponentPageBody>component.getFather()).arrayAppObject[3].arrayAppObject[0].arrayAppObject[0].arrayAppObject[0]).arrayComboBox[0].getElement()).selectedIndex;
-        // let selected = (<HTMLSelectElement>(<ComponentDataInput>(<ComponentPageBody>component.getFather()).arrayAppObject[3].arrayAppObject[0].arrayAppObject[0].arrayAppObject[0]).arrayComboBox[0].getElement()).options[selectedIndex].text;
-        // let password = (<HTMLInputElement>(<ComponentDataInput>(<ComponentPageBody>component.getFather()).arrayAppObject[4].arrayAppObject[0]).arrayTextField[0].getElement()).value;
-        // console.log(selected);
-        // console.log(password);
+        console.log(component);
+        let fatherDiv = <Component>component.getFather().getFather();
+        let comboBox = <ComponentComboBox>(fatherDiv).arrayAppObject[1].arrayAppObject[0].arrayAppObject[0];
+        let textField = <ComponentTextField>(fatherDiv).arrayAppObject[2].arrayAppObject[0].arrayAppObject[0];
+        console.log(comboBox);
+        console.log(textField);
+        let selectedIndex = (<HTMLSelectElement>comboBox.getElement()).selectedIndex;
+        let selected = (<HTMLSelectElement>comboBox.getElement()).options[selectedIndex].text;
+        let password = (<HTMLInputElement>textField.getElement()).value;
+        console.log(selected);
+        console.log(password);
 
-        // let wifi = Wifi.getInstance();
-        // wifi.subscribe((data) => { wifi.connectResponse(component, data); });
-        // wifi.setWifiConnection({ ssid: selected, password: password });
+        let wifi = Wifi.getInstance();
+        wifi.subscribe((data) => { wifi.connectResponse(component, data); });
+        wifi.setWifiConnection({ ssid: selected, password: password });
     }
 
     public connectResponse(component, data) {
@@ -119,49 +126,59 @@ export class Wifi extends AppObject implements Observer {
     }
 
     public getConnected(component) {
-        // let wifi = Wifi.getInstance();
-        // wifi.subscribe((data) => { wifi.connected(component, data); });
-        // wifi.getWifiConnected({});
+        let wifi = Wifi.getInstance();
+        wifi.subscribe((data) => { wifi.connected(component, data); });
+        wifi.getWifiConnected({});
     }
 
     public connected(component, data) {
-        // if (component != null && document.getElementById(component.getElement().id) != null) {
-        //     // console.log("CONECTED:"+component.getElement().id);
-        //     // console.log("CONECTED:");
-        //     if (data.current) {
-        //         if (data.current.length > 0) {
-        //             (<ComponentInformation>component).getElement().innerHTML = data.current[0].ssid;
-        //         } else {
-        //             (<ComponentInformation>component).getElement().innerHTML = '';
-        //         }
-        //     }
-        // }
+        if (component != null && document.getElementById(component.getElement().id) != null) {
+            // console.log('CONECTED:' + component.getElement().id);
+            if (data.current) {
+                if (data.current.length > 0) {
+                    (<ComponentInformation>component).getElement().innerHTML = data.current[0].ssid;
+                } else {
+                    (<ComponentInformation>component).getElement().innerHTML = '';
+                }
+            }
+        }
 
-        // // component.destroyElement();
+        // component.destroyElement();
     }
 
     public getConnections(component) {
-        // let wifi = Wifi.getInstance();
-        // wifi.subscribe((data) => { wifi.connections(component, data); });
-        // wifi.getWifiConnections({});
+        let wifi = Wifi.getInstance();
+        wifi.subscribe((data) => { wifi.connections(component, data); });
+        wifi.getWifiConnections({});
     }
 
     public connections(component, data) {
-        // if (data.visible) {
-        //     (<ComponentDataInput>component).arrayComboBox[0].destroyChildElements();
-        //     (<ComponentDataInput>component).arrayComboBox[0].arrayOption = new Array<ComponentOption>();
-        //     (<ComponentDataInput>component).arrayComboBox[0].arrayOption.type = ComponentOption;
+        if (data.visible) {
+            let placeHolder = (<ComponentDataInput>component).arrayAppObject[0];
+            let element = <HTMLSelectElement>component.getElement();
+            let selectedIndex = (element).selectedIndex;
+            let selected = (element).options[selectedIndex].text;
+            (<ComponentDataInput>component).destroyChildElements();
+            (<ComponentDataInput>component).arrayAppObject.push(placeHolder);
 
-        //     console.log(data.visible);
-        //     data.visible.forEach(network => {
-        //         let option: ComponentOption = new ComponentOption((<ComponentDataInput>component).arrayComboBox[0]);
-        //         option.getElement().innerHTML = network.ssid;
-        //         console.log(network.ssid);
-        //         (<ComponentDataInput>component).arrayComboBox[0].arrayOption.push(option);
-        //     });
+            console.log(data.visible);
+            data.visible.forEach(network => {
+                let option: ComponentOption = new ComponentOption((<ComponentDataInput>component));
+                option.getElement().innerHTML = network.ssid;
+                console.log(network.ssid);
+                (<ComponentDataInput>component).arrayAppObject.push(option);
+            });
 
-        //     // component.destroyElement();
-        // }
+            for (let index = 0; index < (element).options.length; index++) {
+                let option = (element).options[index].text;
+                if (selected === option) {
+                    (element).selectedIndex = index;
+                    return;
+                }
+            }
+
+            // component.destroyElement();
+        }
     }
 
     private init() {

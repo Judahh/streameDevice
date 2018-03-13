@@ -26,13 +26,62 @@
             "type": "ComponentMenuHorizontal",
             "arrayAppObject": [
                 {
-                    "type": "ComponentLeftHolder"
+                    "type": "ComponentLeftHolder",
+                    "arrayAppObject": [
+                        {
+                            "type": "ComponentInformation",
+                            "arrayAppObjectEvent": [
+                                {
+                                    "name": "build",
+                                    "appObject": {},
+                                    "runFunction": "getStrength(this.father)",
+                                    "code": "Wifi"
+                                }
+                            ],
+                            "element": {
+                                "className": "ClassMaterialDesign",
+                                "style": {
+                                    "display": "inline-flex",
+                                    "padding": "5px",
+                                    "color": "white"
+                                }
+                            },
+                            "information": ""
+                        }
+                    ]
                 },
                 {
-                    "type": "ComponentCenterHolder"
+                    "type": "ComponentCenterHolder",
+                    "arrayAppObject": [
+                        {
+                            "type": "ComponentInformation",
+                            "arrayAppObjectEvent": [
+                                {
+                                    "name": "build",
+                                    "appObject": {},
+                                    "runFunction": "getTime(this.father)",
+                                    "code": "Time"
+                                }
+                            ],
+                            "element": {
+                                "className": "ClassFuturisticI",
+                                "style": {
+                                    "display": "inline-flex",
+                                    "padding": "5px",
+                                    "color": "white"
+                                }
+                            },
+                            "information": ""
+                        }
+                    ]
                 },
                 {
-                    "type": "ComponentRightHolder"
+                    "type": "ComponentRightHolder",
+                    "arrayAppObject": [
+                        {
+
+                        }
+                    ]
                 },
                 {
                     "type": "ComponentNotification"

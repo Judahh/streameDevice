@@ -20,17 +20,18 @@ export class Languages extends AppObject {
     }
 
     protected updateLanguage(jSON) {
+        // console.log('updateLanguage!!', jSON);
         if (Languages.languages.length === 0) {
             for (let lIndex = 0; lIndex < jSON.length; lIndex++) {
                 let code = jSON[lIndex]['language'];
                 let name = jSON[lIndex]['languageName'];
-                let language = {
+                let newLanguage = {
                     'code': code,
                     'name': name
                 }
-                Languages.languages.push(language);
+                Languages.languages.push(newLanguage);
             }
-            // console.log(this.languages);
+            // console.log('NEW:', Languages.languages);
         }
 
         let _self = this;
@@ -42,14 +43,15 @@ export class Languages extends AppObject {
 
         let currentLanguage = this.getCurrentLanguage();
         // let index = 0;
+        let comboBox = <ComponentComboBox>this.father.getFather();
         for (let index = 0; index < Languages.languages.length; index++) {
-            var language = Languages.languages[index];
-            let option: ComponentOption = new ComponentOption((<ComponentComboBox>this.father));
+            let language = Languages.languages[index];
+            let option: ComponentOption = new ComponentOption(comboBox);
             option.getElement().innerHTML = language.name;
             // console.log(language.name);
-            (<ComponentComboBox>this.father).arrayOption.push(option);
+            (comboBox).arrayOption.push(option);
             if (language.code === currentLanguage) {
-                (<HTMLSelectElement>(<ComponentComboBox>this.father).getElement()).selectedIndex = index;
+                (<HTMLSelectElement>(comboBox).getElement()).selectedIndex = index;
             }
         }
         // Languages.languages.forEach(language => {
@@ -66,10 +68,11 @@ export class Languages extends AppObject {
     }
 
     public setLanguage(component) {
+        // console.log('setLanguage!!');
         let languages = Languages.getLanguages();
-        console.log('RECEIVED!!', Languages.getLanguages());
+        console.log('RECEIVED!!', component);
 
-        let element: any = (<ComponentDataInput>component).arrayComboBox[0].getElement();
+        let element: any = (<ComponentDataInput>component).getElement();
         let languageName = element.options[element.selectedIndex].text;
         // let index = 0;
         for (let index = 0; index < languages.length; index++) {
