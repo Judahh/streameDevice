@@ -66,16 +66,18 @@ export class Stream extends AppObject {
     }
 
     public startRecording() {
-        console.log('Start Record!!!');
         let _self = this;
-        _self.streamRecorder = new MediaRecorder(_self.stream, {
-            mimeType: ('video/' + _self.format)
-        });
-        _self.streamRecorder.start();
-        _self.streamRecorder.ondataavailable = (e) => {
-            _self.postVideoToServer(e.data);
-        };
-        setTimeout(() => { _self.restartRecording(); }, _self.duration);
+        if (_self.duration > 0) {
+            console.log('Start Record!!!');
+            _self.streamRecorder = new MediaRecorder(_self.stream, {
+                mimeType: ('video/' + _self.format)
+            });
+            _self.streamRecorder.start();
+            _self.streamRecorder.ondataavailable = (e) => {
+                _self.postVideoToServer(e.data);
+            };
+            setTimeout(() => { _self.restartRecording(); }, _self.duration);
+        }
     }
 
     public setDuration(duration: number) {

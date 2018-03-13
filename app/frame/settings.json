@@ -25,184 +25,124 @@
             "type": "ComponentDivisor",
             "element": {
                 "style": {
-                    "height": "100%",
-                    "text-align": "center",
-                    "justify-content": "center",
-                    "display": "flex",
-                    "align-items": "center"
+                    "height": "100%"
                 }
             },
             "arrayAppObject": [
                 {
                     "type": "ComponentDivisor",
-                    "element": {
-                        "style": {
-                            "width": "85%",
-                            "border": "solid 1px white",
-                            "padding": "5px",
-                            "box-sizing": "border-box"
-                        }
-                    },
                     "arrayAppObject": [
                         {
                             "type": "ComponentDivisor",
                             "element": {
                                 "style": {
+                                    "opacity": 1,
+                                    "display": "contents",
+                                    "color": "transparent"
                                 }
                             },
-                            "arrayAppObject": [
-                                {
-                                    "type": "ComponentDataInput",
-                                    "element": {
-                                        "style": {
-                                            "display": "inline-flex",
-                                            "padding": "5px",
-                                            "width": "100%",
-                                            "box-sizing": "border-box"
-                                        }
-                                    },
-                                    "arrayAppObject": [
-                                        {
-                                            "type": "ComponentComboBox",
-                                            "element": {
-                                                "style": {
-                                                    "color": "white",
-                                                    "width": "100%",
-                                                    "border": "1px solid white",
-                                                    "opacity": 1
-                                                },
-                                                "placeholder": "resolution"
-                                            },
-                                            "arrayAppObject": [
-                                                {
-                                                    "type": "ComponentOption",
-                                                    "element": {
-                                                        "value":"",
-                                                        "selected": true,
-                                                        "hidden": true,
-                                                        "disabled": true
-                                                    },
-                                                    "information": "resolution"
-                                                },
-                                                {
-                                                    "type": "ComponentOption",
-                                                    "element": {
-                                                        "value":"0"
-                                                    },
-                                                    "information": "1280 x 720"
-                                                },
-                                                {
-                                                    "type": "ComponentOption",
-                                                    "element": {
-                                                        "value":"1"
-                                                    },
-                                                    "information": "960 x 800"
-                                                },
-                                                {
-                                                    "type": "ComponentOption",
-                                                    "element": {
-                                                        "value":"1"
-                                                    },
-                                                    "information": "720 x 480"
-                                                },
-                                                {
-                                                    "type": "ComponentOption",
-                                                    "element": {
-                                                        "value":"1"
-                                                    },
-                                                    "information": "640 x 480"
-                                                },
-                                                {
-                                                    "type": "ComponentOption",
-                                                    "element": {
-                                                        "value":"1"
-                                                    },
-                                                    "information": "320 x 240"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "ComponentDivisor",
-                            "element": {
-                                "style": {
-                                }
-                            },
-                            "arrayAppObject": [
-                                {
-                                    "type": "ComponentDataInput",
-                                    "element": {
-                                        "style": {
-                                            "display": "inline-flex",
-                                            "padding": "5px",
-                                            "width": "100%",
-                                            "box-sizing": "border-box"
-                                        }
-                                    },
-                                    "arrayAppObject": [
-                                        {
-                                            "type": "ComponentTextField",
-                                            "element": {
-                                                "style": {
-                                                    "color": "white",
-                                                    "border-bottom": "1px solid white",
-                                                    "opacity": 1
-                                                },
-                                                "placeholder": "duration",
-                                                "type":"number"
-                                            }
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "ComponentDivisor",
                             "arrayAppObject": [
                                 {
                                     "type": "ComponentDivisor",
-                                    "arrayAppObjectEvent": [
-                                        {
-                                            "name": "click",
-                                            "appObject": {},
-                                            "runFunction": "set(this)",
-                                            "code": "StreamConfig"
-                                        },
-                                        {
-                                            "name": "build",
-                                            "appObject": {},
-                                            "runFunction": "read(this)",
-                                            "code": "StreamConfig"
-                                        }
-                                    ],
                                     "element": {
                                         "style": {
-                                            "display": "inline-flex",
-                                            "width": "100%",
-                                            "padding": "5px",
                                             "float": "left",
-                                            "box-sizing": "border-box"
-                                        }
+                                            "color": "black",
+                                            "opacity": 0.8,
+                                            "background-color": "rgba(255, 255, 255, 0.3)",
+                                            "margin": "2.5%",
+                                            "padding": "2.5%",
+                                            "display": "inherit"
+                                        },
+                                        "className": "ClassMenu"
                                     },
+                                    "arrayAppObjectEvent": [
+                                        {
+                                            "name": "router",
+                                            "link": "connectivitySettings"
+                                        }
+                                    ],
                                     "arrayAppObject": [
                                         {
-                                            "type": "ComponentInformation",
-                                            "information": "save",
+                                            "type": "ComponentFontAwesome",
                                             "element": {
-                                                "className": "ClassOpenSans",
                                                 "style": {
-                                                    "width": "100%",
-                                                    "padding": "5px",
-                                                    "font-size": "16px",
-                                                    "text-align": "center",
-                                                    "float": "left",
-                                                    "border": "solid 1px white",
+                                                    "vertical-align": "-webkit-baseline-middle",
                                                     "color": "white",
-                                                    "box-sizing": "border-box"
-                                                }
+                                                    "opacity": "1",
+                                                    "font-size": "20vw"
+                                                },
+                                                "className": "ClassPulse fas fa-wifi"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "ComponentDivisor",
+                                    "element": {
+                                        "style": {
+                                            "float": "left",
+                                            "color": "black",
+                                            "opacity": 0.8,
+                                            "background-color": "rgba(255, 255, 255, 0.3)",
+                                            "margin": "2.5%",
+                                            "padding": "2.5%",
+                                            "display": "inherit"
+                                        },
+                                        "className": "ClassMenu"
+                                    },
+                                    "arrayAppObjectEvent": [
+                                        {
+                                            "name": "router",
+                                            "link": "cameraSettings"
+                                        }
+                                    ],
+                                    "arrayAppObject": [
+                                        {
+                                            "type": "ComponentFontAwesome",
+                                            "element": {
+                                                "style": {
+                                                    "vertical-align": "-webkit-baseline-middle",
+                                                    "color": "white",
+                                                    "opacity": "1",
+                                                    "font-size": "20vw"
+                                                },
+                                                "className": "ClassPulse fas fa-camera"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "ComponentDivisor",
+                                    "element": {
+                                        "style": {
+                                            "float": "left",
+                                            "color": "black",
+                                            "opacity": 0.8,
+                                            "background-color": "rgba(255, 255, 255, 0.3)",
+                                            "margin": "2.5%",
+                                            "padding": "2.5%",
+                                            "display": "inherit"
+                                        },
+                                        "className": "ClassMenu"
+                                    },
+                                    "arrayAppObjectEvent": [
+                                        {
+                                            "name": "router",
+                                            "link": "languageSettings"
+                                        }
+                                    ],
+                                    "arrayAppObject": [
+                                        {
+                                            "type": "ComponentFontAwesome",
+                                            "element": {
+                                                "style": {
+                                                    "vertical-align": "-webkit-baseline-middle",
+                                                    "color": "white",
+                                                    "opacity": "1",
+                                                    "font-size": "20vw"
+                                                },
+                                                "className": "ClassPulse fas fa-language"
                                             }
                                         }
                                     ]

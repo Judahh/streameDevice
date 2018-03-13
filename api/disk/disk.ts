@@ -50,6 +50,11 @@ export class Disk implements Observer {
             });
     }
 
+    public checkVideos() {
+        let path = os.platform() === 'win32' ? process.env.WIN32_VIDEOS_PATH : process.env.LINUX_VIDEOS_PATH;
+        return fs.existsSync(path);
+    }
+
     public uploadVideo(video) {
         let _self = this;
         let path = os.platform() === 'win32' ? process.env.WIN32_VIDEOS_PATH : process.env.LINUX_VIDEOS_PATH;

@@ -110,6 +110,10 @@ export class HardwareHandler extends BasicHardwareHandler {
         this.disk.getSpace();
     }
 
+    public checkVideos() {
+        return this.disk.checkVideos();
+    }
+
     public getVideos() {
         this.disk.getVideos();
     }
@@ -211,7 +215,7 @@ export class HardwareHandler extends BasicHardwareHandler {
     public getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+        return Math.floor(Math.random() * (max - min)) + min; // The maximum is exclusive and the minimum is inclusive
     }
 
     public getRandomColor(min, max) {
@@ -221,7 +225,7 @@ export class HardwareHandler extends BasicHardwareHandler {
 
         for (let index = 0; index < minA.length; index++) {
             color += this.getRandomColorPart(
-                parseInt('0x' + minA[index]), 
+                parseInt('0x' + minA[index]),
                 parseInt('0x' + maxA[index]));
         }
         return color;

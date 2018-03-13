@@ -15,7 +15,7 @@
                     "facingMode": "environment"
                 },
                 "audio": true,
-                "duration": 1000
+                "duration": 0
             },
             "runFunction": "run()",
             "code": "Stream"
