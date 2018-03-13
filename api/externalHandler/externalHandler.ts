@@ -114,10 +114,10 @@ export class ExternalHandler extends BasicExternalHandler {
         basicSocket.on('getWifiConnections', () => { _self.getWifiConnections(basicSocket); });
         basicSocket.on('setWifiConnection', (data) => { _self.setWifiConnection(data); });
 
-        basicSocket.on('user', (user) => { _self.hardwareHandler.addUser(user); });
-        basicSocket.on('removeUser', (user) => { _self.hardwareHandler.removeUser(user); });
-        basicSocket.on('users', (users) => { _self.hardwareHandler.setUsers(users); });
-        basicSocket.on('getUsers', () => { _self.hardwareHandler.getUsers(basicSocket); });
+        // basicSocket.on('user', (user) => { _self.hardwareHandler.addUser(user); });
+        // basicSocket.on('removeUser', (user) => { _self.hardwareHandler.removeUser(user); });
+        // basicSocket.on('users', (users) => { _self.hardwareHandler.setUsers(users); });
+        // basicSocket.on('getUsers', () => { _self.hardwareHandler.getUsers(basicSocket); });
 
 
         basicSocket.on('subscribeStream', () => { _self.appSubscribeStream('streamIn', basicSocket); });
