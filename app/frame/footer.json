@@ -122,7 +122,49 @@
                         "style": {
                             "width": "33%"
                         }
-                    }
+                    },
+                    "arrayAppObject": [
+                        {
+                            "type": "ComponentDivisor",
+                            "arrayAppObjectEvent": [
+                                {
+                                    "name": "router",
+                                    "link": "settings"
+                                }
+                            ],
+                            "element": {
+                                "style": {
+                                    "display": "inline-flex"
+                                }
+                            },
+                            "arrayAppObject": [
+                                {
+                                    "type": "ComponentDivisor",
+                                    "element": {
+                                        "style": {
+                                            "display": "inherit"
+                                        },
+                                        "className": "ClassMenu"
+                                    },
+                                    "arrayAppObject": [
+                                        {
+                                            "type": "ComponentFontAwesome",
+                                            "element": {
+                                                "style": {
+                                                    "vertical-align": "-webkit-baseline-middle",
+                                                    "color": "white",
+                                                    "opacity": "1",
+                                                    "padding": "5px",
+                                                    "font-size": "30px"
+                                                },
+                                                "className": "ClassPulse fas fa-cog"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }

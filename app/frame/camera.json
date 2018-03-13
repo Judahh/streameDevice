@@ -39,7 +39,6 @@
                     "type": "ComponentVideoHolder",
                     "element": {
                         "style": {
-                            "padding": "5px",
                             "textAlign": "center",
                             "justify-content": "center",
                             "display": "flex",
@@ -47,28 +46,30 @@
                             "align-items": "center",
                             "opacity": 1,
                             "font-size": "25px",
-                            "padding-top": "unset",
-                            "visibility": "visible"
+                            "padding-top": "0px",
+                            "visibility": "visible",
+                            "height": "100%",
+                            "width": "100%"
                         }
                     },
                     "arrayAppObject": [
                         {
                             "type": "ComponentVideo",
                             "element": {
-                                "controls": "false",
-                                "autoplay": "true",
+                                "controls": false,
+                                "autoplay": true,
                                 "name": "media",
                                 "style": {
                                     "position": "inherit",
                                     "height": "100%",
-                                    "width": "100%"
+                                    "width": "auto"
                                 }
                             },
                             "arrayAppObjectEvent": [
                                 {
                                     "name": "build",
                                     "appObject": {},
-                                    "runFunction": "getStreamView(this)",
+                                    "runFunction": "getStreamView(this.father)",
                                     "code": "Stream"
                                 }
                             ]

@@ -4,6 +4,8 @@
         "title":"Configurações",
         "back":"home",
         "langTitle":"Idioma",
+        "resolution":"Resolução",
+        "save":"Salvar",
         "languageName":"Português - Brasil"
     },
     {
@@ -11,6 +13,8 @@
         "title":"Configurações",
         "back":"home",
         "langTitle":"Idioma",
+        "resolution":"Resolução",
+        "save":"Salvar",
         "languageName":"Português"
     },
     {
@@ -18,6 +22,8 @@
         "title":"Configuration",
         "back":"home",
         "langTitle":"Language",
+        "resolution":"Resolution",
+        "save":"Save",
         "languageName":"English - USA"
     },
     {
@@ -25,6 +31,8 @@
         "title":"Configuration",
         "back":"home",
         "langTitle":"Language",
+        "resolution":"Resolution",
+        "save":"Save",
         "languageName":"English"
     }
 ]

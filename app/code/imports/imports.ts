@@ -7,6 +7,7 @@ import { Wifi } from './../wifi/wifi';
 import { Disk } from './../disk/disk';
 import { UserManegement } from './../user/userManegement';
 import { Stream } from './../stream/stream';
+import { StreamConfig } from './../stream/streamConfig';
 import { Languages } from './../languages/Languages';
 import { Keyboard } from './../keyboard/keyboard';
 import { Operations } from './../operations/operations';
@@ -27,7 +28,7 @@ export {
     Time,
     Wifi,
     Disk,
-    Stream,
+    Stream, StreamConfig,
     Keyboard,
     Operations,
     Languages,

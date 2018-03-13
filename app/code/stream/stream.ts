@@ -144,7 +144,7 @@ export class Stream extends AppObject {
     }
 
     public streamView(component, stream) {
-        console.log('STREAMVIEW!!!');
+        console.log('STREAMVIEW!!!', component);
         (<any>(<Component>component).getElement()).src = window.URL.createObjectURL(stream);
     }
 

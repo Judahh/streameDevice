@@ -1,238 +1,209 @@
 {
     "background": {
-        "image": {
-            "element": {
-                "style": {
-                    "background-color": "rgba(225, 223, 221,1)",
-                    "opacity": 1,
-                    "visibility": "visible",
-                    "position": "fixed",
-                    "filter": "brightness(100%) grayscale(0%) blur(0px)",
-                    "zIndex": -1000,
-                    "max-width": "inherit",
-                    "max-height": "inherit",
-                    "width": "100%",
-                    "height": "100%"
-                }
-            },
-            "img": {
-                "element": {
-                    "style": {
-                        "width": "100%",
-                        "opacity": 0.1,
-                        "height": "100%"
-                    },
-                    "src": "image/streame.svg"
-                }
+        "element": {
+            "style": {
+                "background-color": "dodgerblue",
+                "opacity": 1,
+                "visibility": "visible",
+                "position": "fixed",
+                "filter": "brightness(100%) grayscale(0%) blur(0px)",
+                "zIndex": -1000,
+                "max-width": "inherit",
+                "max-height": "inherit",
+                "width": "100%",
+                "height": "100%",
+                "text-align": "center",
+                "justify-content": "center",
+                "display": "flex",
+                "align-items": "center",
+                "mix-blend-mode": "difference"
             }
         }
     },
-    "arrayDivisor": [
+    "arrayAppObject": [
         {
-            "arrayAuthorization": [
-                {
-                    "code": "UserManegement",
-                    "runFunction": "goToLogin()"
+            "type": "ComponentDivisor",
+            "element": {
+                "style": {
+                    "height": "100%",
+                    "text-align": "center",
+                    "justify-content": "center",
+                    "display": "flex",
+                    "align-items": "center"
                 }
-            ],
-            "arrayDivisor": [
+            },
+            "arrayAppObject": [
                 {
+                    "type": "ComponentDivisor",
                     "element": {
                         "style": {
-                            "height": "10px",
-                            "width": "100%",
-                            "display": "block",
-                            "opacity": 1,
-                            "color": "transparent",
-                            "padding": [
-                                5
-                            ]
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "arrayDivisor": [
-                {
-                    "element": {
-                        "style": {
-                            "opacity": 1,
-                            "width": "100%",
-                            "display": "block",
-                            "color": "transparent",
-                            "margin-top": "20px",
-                            "margin-left": "15px",
-                            "padding": [
-                                5
-                            ]
+                            "width": "85%",
+                            "border": "solid 1px white",
+                            "padding": "5px",
+                            "box-sizing": "border-box"
                         }
                     },
-                    "arrayDivisor": [
+                    "arrayAppObject": [
                         {
-                            "arrayItem": [
+                            "type": "ComponentDivisor",
+                            "element": {
+                                "style": {
+                                }
+                            },
+                            "arrayAppObject": [
                                 {
+                                    "type": "ComponentDataInput",
                                     "element": {
                                         "style": {
-                                            "display": "block",
-                                            "float": "left",
+                                            "display": "inline-flex",
+                                            "padding": "5px",
                                             "width": "100%",
-                                            "text-align": "center",
-                                            "margin": "1px 0px"
+                                            "box-sizing": "border-box"
                                         }
                                     },
-                                    "colorEffect": {
-                                        "element": {
-                                            "style": {
-                                                "color": "black"
+                                    "arrayAppObject": [
+                                        {
+                                            "type": "ComponentComboBox",
+                                            "element": {
+                                                "style": {
+                                                    "color": "white",
+                                                    "width": "100%",
+                                                    "border": "1px solid white",
+                                                    "opacity": 1
+                                                },
+                                                "placeholder": "resolution"
+                                            },
+                                            "arrayAppObject": [
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"",
+                                                        "selected": true,
+                                                        "hidden": true,
+                                                        "disabled": true
+                                                    },
+                                                    "information": "resolution"
+                                                },
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"0"
+                                                    },
+                                                    "information": "1280 x 720"
+                                                },
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"1"
+                                                    },
+                                                    "information": "960 x 800"
+                                                },
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"1"
+                                                    },
+                                                    "information": "720 x 480"
+                                                },
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"1"
+                                                    },
+                                                    "information": "640 x 480"
+                                                },
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"1"
+                                                    },
+                                                    "information": "320 x 240"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "ComponentDivisor",
+                            "element": {
+                                "style": {
+                                }
+                            },
+                            "arrayAppObject": [
+                                {
+                                    "type": "ComponentDataInput",
+                                    "element": {
+                                        "style": {
+                                            "display": "inline-flex",
+                                            "padding": "5px",
+                                            "width": "100%",
+                                            "box-sizing": "border-box"
+                                        }
+                                    },
+                                    "arrayAppObject": [
+                                        {
+                                            "type": "ComponentTextField",
+                                            "element": {
+                                                "style": {
+                                                    "color": "white",
+                                                    "border-bottom": "1px solid white",
+                                                    "opacity": 1
+                                                },
+                                                "placeholder": "duration",
+                                                "type":"number"
                                             }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "ComponentDivisor",
+                            "arrayAppObject": [
+                                {
+                                    "type": "ComponentDivisor",
+                                    "arrayAppObjectEvent": [
+                                        {
+                                            "name": "click",
+                                            "appObject": {},
+                                            "runFunction": "set(this)",
+                                            "code": "StreamConfig"
                                         },
-                                        "font": {
+                                        {
+                                            "name": "build",
+                                            "appObject": {},
+                                            "runFunction": "read(this)",
+                                            "code": "StreamConfig"
+                                        }
+                                    ],
+                                    "element": {
+                                        "style": {
+                                            "display": "inline-flex",
+                                            "width": "100%",
+                                            "padding": "5px",
+                                            "float": "left",
+                                            "box-sizing": "border-box"
+                                        }
+                                    },
+                                    "arrayAppObject": [
+                                        {
+                                            "type": "ComponentInformation",
+                                            "information": "save",
                                             "element": {
                                                 "className": "ClassOpenSans",
                                                 "style": {
                                                     "width": "100%",
-                                                    "font-size": "2vw",
+                                                    "padding": "5px",
+                                                    "font-size": "16px",
                                                     "text-align": "center",
-                                                    "padding": [
-                                                        0
-                                                    ]
-                                                }
-                                            },
-                                            "animationEffect": {
-                                                "element": {
-                                                    "style": {
-                                                        "display": "block"
-                                                    }
-                                                },
-                                                "animationSubEffect": {
-                                                    "arrayAnimationSubEffectHolder": [
-                                                        {
-                                                            "information": {
-                                                                "information": "title",
-                                                                "element": {
-                                                                    "style": {
-                                                                        "vertical-align": "sub"
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    ]
+                                                    "float": "left",
+                                                    "border": "solid 1px white",
+                                                    "color": "white",
+                                                    "box-sizing": "border-box"
                                                 }
                                             }
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "arrayDivisor": [
-                {
-                    "element": {
-                        "style": {
-                            "opacity": 1,
-                            "width": "100%",
-                            "display": "contents",
-                            "float": "none",
-                            "color": "transparent",
-                            "padding": [
-                                5
-                            ]
-                        }
-                    },
-                    "arrayDivisor": [
-                        {
-                            "element": {
-                                "style": {
-                                    "display": "inline-block",
-                                    "width": "100%",
-                                    "float": "none",
-                                    "background-color": "rgba(255, 255, 255, 0.3)",
-                                    "margin": "1px 0px",
-                                    "padding": "2.5%",
-                                    "opacity": 0.9
-                                }
-                            },
-                            "arrayItem": [
-                                {
-                                    "element": {
-                                        "style": {
-                                            "padding-left": "10px",
-                                            "display": "block",
-                                            "float": "left"
-                                        }
-                                    },
-                                    "colorEffect": {
-                                        "element": {
-                                            "style": {
-                                                "color": "black"
-                                            }
-                                        },
-                                        "font": {
-                                            "element": {
-                                                "className": "ClassOpenSans",
-                                                "style": {
-                                                    "width": "200px",
-                                                    "height": "100%",
-                                                    "font-size": "20px",
-                                                    "padding": [
-                                                        0
-                                                    ]
-                                                }
-                                            },
-                                            "animationEffect": {
-                                                "element": {
-                                                    "style": {
-                                                        "display": "block"
-                                                    }
-                                                },
-                                                "animationSubEffect": {
-                                                    "arrayAnimationSubEffectHolder": [
-                                                        {
-                                                            "information": {
-                                                                "information": "langTitle",
-                                                                "element": {}
-                                                            }
-                                                        }
-                                                    ]
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            ],
-                            "arrayDataInput": [
-                                {
-                                    "element": {
-                                        "special": {
-                                            "tabindex":"00"
-                                        },
-                                        "style": {
-                                            "color": "black",
-                                            "opacity": 0.8,
-                                            "font-size": "25px",
-                                            "margin": "10px"
-                                        }
-                                    },
-                                    "arrayComboBox": [
-                                        {
-                                            "code": "Languages",
-                                            "runFunction": "run()",
-                                            "runOnBuild": true,
-                                            "appObject": {},
-                                            "arrayOption": []
-                                        }
-                                    ],
-                                    "arrayAppObjectEvent": [
-                                        {
-                                            "name": "change",
-                                            "appObject": {},
-                                            "runFunction": "run()",
-                                            "code": "SetLanguage"
                                         }
                                     ]
                                 }

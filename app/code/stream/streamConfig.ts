@@ -34,38 +34,40 @@ export class StreamConfig extends AppObject {
     //     // console.log('duration:', duration);
 
     //     stream.setVideo(video);
-    //     // _self.stream.setWifiConnection((data) => { _self.response(data); }, { ssid: selected, password: password });    
-    // }
-
-    // public read(component) {
-    //     let body: Component = <Component>component.getFather().getFather().
-    //     getFather().getFather().getFather().getFather().getFather().getFather().getFather().getFather();
-    //     // console.log('body:', body);
-    //     let selectedIndex = (<HTMLSelectElement>body.arrayDivisor[2].arrayDivisor[0].arrayDivisor[0].arrayDataInput[0].
-    //         arrayComboBox[0].getElement()).selectedIndex;
-    //     let selected = (<HTMLSelectElement>body.arrayDivisor[2].arrayDivisor[0].arrayDivisor[0].arrayDataInput[0].
-    //         arrayComboBox[0].getElement()).options[selectedIndex].text;
-    //     let duration = (<HTMLInputElement>body.arrayDivisor[2].arrayDivisor[0].arrayDivisor[1].arrayDataInput[0].
-    //         arrayTextField[0].getElement()).value;
-    //     let stream = Stream.getInstance();
-
-    //     (<HTMLInputElement>body.arrayDivisor[2].arrayDivisor[0].arrayDivisor[1].arrayDataInput[0].arrayTextField[0].
-    //         getElement()).value = '' + stream.getDuration();
-    //     let resolution = stream.getVideo().width.exact + ' x ' + stream.getVideo().height.exact;
-
-    //     // console.log('current: ' + resolution);
-
-    //     for (let index = 0; index < (<HTMLSelectElement>body.arrayDivisor[2].arrayDivisor[0].arrayDivisor[0].arrayDataInput[0].
-    //         arrayComboBox[0].getElement()).options.length; index++) {
-    //         let element = (<HTMLSelectElement>body.arrayDivisor[2].arrayDivisor[0].arrayDivisor[0].arrayDataInput[0].
-    //             arrayComboBox[0].getElement()).options[index].text;
-    //         if (element === resolution) {
-    //             (<HTMLSelectElement>body.arrayDivisor[2].arrayDivisor[0].arrayDivisor[0].arrayDataInput[0].arrayComboBox[0].
-    //                 getElement()).selectedIndex = index;
-    //             return;
-    //         }
-    //     }
-
     //     // _self.stream.setWifiConnection((data) => { _self.response(data); }, { ssid: selected, password: password });
     // }
+
+    public read(component) {
+        console.log('READ');
+        console.log(component);
+        // let body: Component = <Component>component.getFather().getFather().
+        // getFather().getFather().getFather().getFather().getFather().getFather().getFather().getFather();
+        // // console.log('body:', body);
+        // let selectedIndex = (<HTMLSelectElement>body.arrayDivisor[2].arrayDivisor[0].arrayDivisor[0].arrayDataInput[0].
+        //     arrayComboBox[0].getElement()).selectedIndex;
+        // let selected = (<HTMLSelectElement>body.arrayDivisor[2].arrayDivisor[0].arrayDivisor[0].arrayDataInput[0].
+        //     arrayComboBox[0].getElement()).options[selectedIndex].text;
+        // let duration = (<HTMLInputElement>body.arrayDivisor[2].arrayDivisor[0].arrayDivisor[1].arrayDataInput[0].
+        //     arrayTextField[0].getElement()).value;
+        // let stream = Stream.getInstance();
+
+        // (<HTMLInputElement>body.arrayDivisor[2].arrayDivisor[0].arrayDivisor[1].arrayDataInput[0].arrayTextField[0].
+        //     getElement()).value = '' + stream.getDuration();
+        // let resolution = stream.getVideo().width.exact + ' x ' + stream.getVideo().height.exact;
+
+        // // console.log('current: ' + resolution);
+
+        // for (let index = 0; index < (<HTMLSelectElement>body.arrayDivisor[2].arrayDivisor[0].arrayDivisor[0].arrayDataInput[0].
+        //     arrayComboBox[0].getElement()).options.length; index++) {
+        //     let element = (<HTMLSelectElement>body.arrayDivisor[2].arrayDivisor[0].arrayDivisor[0].arrayDataInput[0].
+        //         arrayComboBox[0].getElement()).options[index].text;
+        //     if (element === resolution) {
+        //         (<HTMLSelectElement>body.arrayDivisor[2].arrayDivisor[0].arrayDivisor[0].arrayDataInput[0].arrayComboBox[0].
+        //             getElement()).selectedIndex = index;
+        //         return;
+        //     }
+        // }
+
+        // // _self.stream.setWifiConnection((data) => { _self.response(data); }, { ssid: selected, password: password });
+    }
 }
