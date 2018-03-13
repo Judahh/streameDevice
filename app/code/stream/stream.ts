@@ -7,11 +7,17 @@ declare var AudioContext: any;
 
 export class Stream extends AppObject {
     private static instance: Stream;
+    private stream;
+    private format: string;
+    private video: any;
+    private audio: boolean;
+    private duration: number;
+    private disk: Disk;
+    private streamRecorder;
     private socketIo: BasicSocket;
-    private subscribers: Array<any>;
     private configuration;
     private streamConnection;
-    private stream;
+    private subscribers: Array<any>;
 
     public static getInstance(father?: Component): Stream {
         if (!Stream.instance) {
@@ -28,7 +34,7 @@ export class Stream extends AppObject {
     public subscribe(callback) {
         // we could check to see if it is already subscribed
         this.subscribers.push(callback);
-        console.log(callback.name, 'has been subscribed to Stream');
+        console.log(callback.name, 'has been subscribed to GSM');
     }
 
     public unsubscribe(callback) {
@@ -43,6 +49,86 @@ export class Stream extends AppObject {
         });
     }
 
+    public run() {
+        console.log('STREAM!!!');
+        let _self = this;
+        _self.disk = Disk.getInstance();
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: _self.video, audio: _self.audio }).then((stream) => {
+                _self.stream = stream;
+                _self.publish(stream);
+                _self.configStream(stream);
+                _self.startRecording();
+            });
+        } else {
+            console.error('cam failed');
+        }
+    }
+
+    public startRecording() {
+        console.log('Start Record!!!');
+        let _self = this;
+        _self.streamRecorder = new MediaRecorder(_self.stream, {
+            mimeType: ('video/' + _self.format)
+        });
+        _self.streamRecorder.start();
+        _self.streamRecorder.ondataavailable = (e) => {
+            _self.postVideoToServer(e.data);
+        };
+        setTimeout(() => { _self.restartRecording(); }, _self.duration);
+    }
+
+    public setDuration(duration: number) {
+        this.duration = duration;
+    }
+
+    public getDuration() {
+        return this.duration;
+    }
+
+    public setVideo(video: any) {
+        let oldVideo = this.video;
+        this.video = video;
+        let _self = this;
+        // _self.streamRecorder.stop();
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: _self.video, audio: _self.audio }).then((stream) => {
+                _self.stream = stream;
+                // console.log(_self.stream);
+                _self.configStream(stream);
+                _self.startRecording();
+            }).catch((error) => {
+                _self.setVideo(oldVideo);
+            });
+        } else {
+            console.error('cam failed');
+        }
+    }
+
+    public getVideo() {
+        return this.video;
+    }
+
+    public restartRecording() {
+        // console.log('Stop Record!!!');
+        let _self = this;
+        _self.streamRecorder.stop();
+        _self.streamRecorder.start();
+        // console.log(_self.duration);
+        setTimeout(() => { _self.restartRecording(); }, _self.duration);
+    }
+
+    public postVideoToServer(videoblob) {
+        // console.log('Post Video to Server!!!');
+        let _self = this;
+        let data = {
+            name: new Date(),
+            video: videoblob,
+            format: _self.format
+        };
+        _self.disk.uploadVideo(data);
+    }
+
     public getStream() {
         return this.stream;
     }
@@ -54,6 +140,7 @@ export class Stream extends AppObject {
         if (streaming !== undefined && streaming != null) {
             stream.streamView(component, streaming);
         }
+
     }
 
     public streamView(component, stream) {
@@ -74,13 +161,14 @@ export class Stream extends AppObject {
             ]
         };
         _self.streamConnection = new webkitRTCPeerConnection(_self.configuration) || new RTCPeerConnection(_self.configuration);
-        _self.configStream();
+        // console.log('STREAM:', _self.streamConnection);
         _self.socketIo.on('stream', (stream) => {
-            if (stream.offer) {
-                _self.handleOffer(stream.offer);
+            if (stream.answer) {
+                console.log('answer!!!');
+                _self.handleAnswer(stream.answer);
             }
             if (stream.candidate) {
-                console.log('CANDIDATE!!!', stream.candidate);
+                console.log('CANDIDATE!!!');
                 _self.streamConnection.addIceCandidate(new RTCIceCandidate(stream.candidate)).then(
                     _self.onAddIceCandidateSuccess,
                     _self.onAddIceCandidateError
@@ -97,42 +185,38 @@ export class Stream extends AppObject {
         console.log('Failed to add ICE candidate: ' + error.toString());
     }
 
-    private handleOffer(offer) {
-        console.log('OFFER!');
-        let _self = this;
-        _self.streamConnection.setRemoteDescription(new RTCSessionDescription(offer));
-
-        // create an answer to an offer
-        _self.streamConnection.createAnswer(
-            (answer) => {
-                console.log('createAnswer!');
-                _self.streamConnection.setLocalDescription(answer);
-                _self.socketIo.emit('stream', { answer: answer });
-
-            },
-            (error) => {
-                console.error('Error when creating an answer');
-            });
-    }
-
-    private configStream() {
+    private configStream(stream) {
+        console.log('configStream!');
         let _self = this;
 
-
-        _self.streamConnection.onaddstream = (e) => {
-            console.log('EVENT:', e);
-            _self.stream = e.stream;
-            _self.publish(e.stream);
-        };
+        // setup stream listening
+        _self.streamConnection.addStream(stream);
 
         // Setup ice handling
         _self.streamConnection.onicecandidate = (event) => {
-
+            // console.log('ICE!', event);
             if (event.candidate) {
                 console.log('onCandidate', event.candidate);
                 _self.socketIo.emit('stream', { candidate: event.candidate });
             }
 
         };
+
+        _self.streamConnection.createOffer(
+            (offer) => {
+                console.log('CREATE OFFER!');
+                _self.socketIo.emit('stream', { offer: offer });
+                _self.streamConnection.setLocalDescription(offer);
+            },
+            (error) => {
+                console.error('ERROR OFFER!', error);
+            }
+        );
+    }
+
+    private handleAnswer(answer) {
+        console.log('Answer!');
+        let _self = this;
+        _self.streamConnection.setRemoteDescription(new RTCSessionDescription(answer));
     }
 }

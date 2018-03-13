@@ -79,9 +79,7 @@
                             "arrayAppObjectEvent": [
                                 {
                                     "name": "router",
-                                    "link": "camera",
-                                    "runFunction": "isLogged",
-                                    "code": "UserManegement"
+                                    "link": "camera"
                                 }
                             ],
                             "element": {

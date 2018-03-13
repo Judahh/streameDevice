@@ -1,18 +1,22 @@
 [
     {
         "language":"en",
-        "title":"STREAME"
+        "signIn":"Sign In",
+        "address":"Address"
     },
     {
         "language":"en-US",
-        "title":"STREAME"
-    },
-    {
-        "language":"pt-BR",
-        "title":"STREAME"
+        "signIn":"Sign In",
+        "address":"Address"
     },
     {
         "language":"pt",
-        "title":"STREAME"
+        "signIn":"Logar",
+        "address":"Endereço"
+    },
+    {
+        "language":"pt-BR",
+        "signIn":"Logar",
+        "address":"Endereço"
     }
 ]
