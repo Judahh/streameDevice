@@ -5,7 +5,10 @@
         "back":"home",
         "langTitle":"Idioma",
         "resolution":"Resolução",
-        "save":"Salvar",
+        "connections":"Conexões",
+        "connectedTo":"Conectado a ",
+        "connect":"Conectar",
+        "password":"Senha",
         "languageName":"Português - Brasil"
     },
     {
@@ -14,7 +17,10 @@
         "back":"home",
         "langTitle":"Idioma",
         "resolution":"Resolução",
-        "save":"Salvar",
+        "connections":"Conexões",
+        "connectedTo":"Conectado a ",
+        "connect":"Conectar",
+        "password":"Senha",
         "languageName":"Português"
     },
     {
@@ -23,7 +29,10 @@
         "back":"home",
         "langTitle":"Language",
         "resolution":"Resolution",
-        "save":"Save",
+        "connections":"Connections",
+        "connectedTo":"Connected to ",
+        "connect":"Connect",
+        "password":"Password",
         "languageName":"English - USA"
     },
     {
@@ -32,7 +41,10 @@
         "back":"home",
         "langTitle":"Language",
         "resolution":"Resolution",
-        "save":"Save",
+        "connections":"Connections",
+        "connectedTo":"Connected to ",
+        "connect":"Connect",
+        "password":"Password",
         "languageName":"English"
     }
 ]

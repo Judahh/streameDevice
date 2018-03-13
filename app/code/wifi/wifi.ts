@@ -101,15 +101,15 @@ export class Wifi extends AppObject implements Observer {
     }
 
     public connect(component) {
-        let selectedIndex = (<HTMLSelectElement>(<ComponentDataInput>(<ComponentPageBody>component.getFather()).arrayAppObject[3].arrayAppObject[0].arrayAppObject[0].arrayAppObject[0]).arrayComboBox[0].getElement()).selectedIndex;
-        let selected = (<HTMLSelectElement>(<ComponentDataInput>(<ComponentPageBody>component.getFather()).arrayAppObject[3].arrayAppObject[0].arrayAppObject[0].arrayAppObject[0]).arrayComboBox[0].getElement()).options[selectedIndex].text;
-        let password = (<HTMLInputElement>(<ComponentDataInput>(<ComponentPageBody>component.getFather()).arrayAppObject[4].arrayAppObject[0]).arrayTextField[0].getElement()).value;
-        console.log(selected);
-        console.log(password);
+        // let selectedIndex = (<HTMLSelectElement>(<ComponentDataInput>(<ComponentPageBody>component.getFather()).arrayAppObject[3].arrayAppObject[0].arrayAppObject[0].arrayAppObject[0]).arrayComboBox[0].getElement()).selectedIndex;
+        // let selected = (<HTMLSelectElement>(<ComponentDataInput>(<ComponentPageBody>component.getFather()).arrayAppObject[3].arrayAppObject[0].arrayAppObject[0].arrayAppObject[0]).arrayComboBox[0].getElement()).options[selectedIndex].text;
+        // let password = (<HTMLInputElement>(<ComponentDataInput>(<ComponentPageBody>component.getFather()).arrayAppObject[4].arrayAppObject[0]).arrayTextField[0].getElement()).value;
+        // console.log(selected);
+        // console.log(password);
 
-        let wifi = Wifi.getInstance();
-        wifi.subscribe((data) => { wifi.connectResponse(component, data); });
-        wifi.setWifiConnection({ ssid: selected, password: password });
+        // let wifi = Wifi.getInstance();
+        // wifi.subscribe((data) => { wifi.connectResponse(component, data); });
+        // wifi.setWifiConnection({ ssid: selected, password: password });
     }
 
     public connectResponse(component, data) {
@@ -119,49 +119,49 @@ export class Wifi extends AppObject implements Observer {
     }
 
     public getConnected(component) {
-        let wifi = Wifi.getInstance();
-        wifi.subscribe((data) => { wifi.connected(component, data); });
-        wifi.getWifiConnected({});
+        // let wifi = Wifi.getInstance();
+        // wifi.subscribe((data) => { wifi.connected(component, data); });
+        // wifi.getWifiConnected({});
     }
 
     public connected(component, data) {
-        if (component != null && document.getElementById(component.getElement().id) != null) {
-            // console.log("CONECTED:"+component.getElement().id);
-            // console.log("CONECTED:");
-            if (data.current) {
-                if (data.current.length > 0) {
-                    (<ComponentInformation>component).getElement().innerHTML = data.current[0].ssid;
-                } else {
-                    (<ComponentInformation>component).getElement().innerHTML = '';
-                }
-            }
-        }
+        // if (component != null && document.getElementById(component.getElement().id) != null) {
+        //     // console.log("CONECTED:"+component.getElement().id);
+        //     // console.log("CONECTED:");
+        //     if (data.current) {
+        //         if (data.current.length > 0) {
+        //             (<ComponentInformation>component).getElement().innerHTML = data.current[0].ssid;
+        //         } else {
+        //             (<ComponentInformation>component).getElement().innerHTML = '';
+        //         }
+        //     }
+        // }
 
-        // component.destroyElement();
+        // // component.destroyElement();
     }
 
     public getConnections(component) {
-        let wifi = Wifi.getInstance();
-        wifi.subscribe((data) => { wifi.connections(component, data); });
-        wifi.getWifiConnections({});
+        // let wifi = Wifi.getInstance();
+        // wifi.subscribe((data) => { wifi.connections(component, data); });
+        // wifi.getWifiConnections({});
     }
 
     public connections(component, data) {
-        if (data.visible) {
-            (<ComponentDataInput>component).arrayComboBox[0].destroyChildElements();
-            (<ComponentDataInput>component).arrayComboBox[0].arrayOption = new Array<ComponentOption>();
-            (<ComponentDataInput>component).arrayComboBox[0].arrayOption.type = ComponentOption;
+        // if (data.visible) {
+        //     (<ComponentDataInput>component).arrayComboBox[0].destroyChildElements();
+        //     (<ComponentDataInput>component).arrayComboBox[0].arrayOption = new Array<ComponentOption>();
+        //     (<ComponentDataInput>component).arrayComboBox[0].arrayOption.type = ComponentOption;
 
-            console.log(data.visible);
-            data.visible.forEach(network => {
-                let option: ComponentOption = new ComponentOption((<ComponentDataInput>component).arrayComboBox[0]);
-                option.getElement().innerHTML = network.ssid;
-                console.log(network.ssid);
-                (<ComponentDataInput>component).arrayComboBox[0].arrayOption.push(option);
-            });
+        //     console.log(data.visible);
+        //     data.visible.forEach(network => {
+        //         let option: ComponentOption = new ComponentOption((<ComponentDataInput>component).arrayComboBox[0]);
+        //         option.getElement().innerHTML = network.ssid;
+        //         console.log(network.ssid);
+        //         (<ComponentDataInput>component).arrayComboBox[0].arrayOption.push(option);
+        //     });
 
-            // component.destroyElement();
-        }
+        //     // component.destroyElement();
+        // }
     }
 
     private init() {

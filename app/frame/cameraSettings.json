@@ -101,21 +101,21 @@
                                                 {
                                                     "type": "ComponentOption",
                                                     "element": {
-                                                        "value":"1"
+                                                        "value":"2"
                                                     },
                                                     "information": "720 x 480"
                                                 },
                                                 {
                                                     "type": "ComponentOption",
                                                     "element": {
-                                                        "value":"1"
+                                                        "value":"3"
                                                     },
                                                     "information": "640 x 480"
                                                 },
                                                 {
                                                     "type": "ComponentOption",
                                                     "element": {
-                                                        "value":"1"
+                                                        "value":"4"
                                                     },
                                                     "information": "320 x 240"
                                                 }
