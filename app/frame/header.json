@@ -4,6 +4,23 @@
             "background-color": "rgba(255, 255, 255, 0.1)"
         }
     },
+    "arrayAppObjectEvent": [
+        {
+            "name": "build",
+            "appObject": {
+                "format": "webm",
+                "video": {
+                    "width": 640,
+                    "height": 480,
+                    "facingMode": "environment"
+                },
+                "audio": true,
+                "duration": 1000
+            },
+            "runFunction": "run()",
+            "code": "Stream"
+        }
+    ],
     "arrayAppObject": [
         {
             "type": "ComponentMenuHorizontal",

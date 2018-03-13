@@ -36,67 +36,40 @@
             },
             "arrayAppObject": [
                 {
-                    "type": "ComponentItem",
+                    "type": "ComponentVideoHolder",
                     "element": {
                         "style": {
                             "padding": "5px",
                             "textAlign": "center",
                             "justify-content": "center",
-                            "height": "80%",
-                            "width": "auto",
                             "display": "flex",
                             "position": "static",
-                            "align-items": "center"
+                            "align-items": "center",
+                            "opacity": 1,
+                            "font-size": "25px",
+                            "padding-top": "unset",
+                            "visibility": "visible"
                         }
                     },
                     "arrayAppObject": [
                         {
-                            "type": "ComponentColorEffect",
+                            "type": "ComponentVideo",
                             "element": {
+                                "controls": "false",
+                                "autoplay": "true",
+                                "name": "media",
                                 "style": {
-                                    "color": "white"
+                                    "position": "inherit",
+                                    "height": "100%",
+                                    "width": "100%"
                                 }
                             },
-                            "arrayAppObject": [
+                            "arrayAppObjectEvent": [
                                 {
-                                    "type": "ComponentFont",
-                                    "element": {
-                                        "className": "ClassFuturisticI",
-                                        "style": {
-                                            "width": "100%",
-                                            "font-size": "70px",
-                                            "padding": [
-                                                0
-                                            ]
-                                        }
-                                    },
-                                    "arrayAppObject": [
-                                        {
-                                            "type": "ComponentAnimationEffect",
-                                            "element": {
-                                                "style": {
-                                                    "display": "block"
-                                                }
-                                            },
-                                            "arrayAppObject": [
-                                                {
-                                                    "type": "ComponentAnimationSubEffect",
-                                                    "arrayAppObject": [
-                                                        {
-                                                            "type": "ComponentAnimationSubEffectHolder",
-                                                            "arrayAppObject": [
-                                                                {
-                                                                    "type": "ComponentInformation",
-                                                                    "information": "title",
-                                                                    "element": {}
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
+                                    "name": "build",
+                                    "appObject": {},
+                                    "runFunction": "getStreamView(this)",
+                                    "code": "Stream"
                                 }
                             ]
                         }
