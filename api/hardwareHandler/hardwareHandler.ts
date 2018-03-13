@@ -5,7 +5,7 @@ import { Disk } from './../disk/disk';
 // import { I2C } from './../i2c/i2c';
 import { Parsers } from './../parser/parsers';
 import { Identification } from './identification';
-import { Handler, Event, Operation } from 'flexiblepersistence';
+import { Handler, Event, Operation, Database } from 'flexiblepersistence';
 // import { Camera } from './../camera/camera';
 
 import * as uptime from 'os-uptime';
@@ -32,8 +32,13 @@ export class HardwareHandler extends BasicHardwareHandler {
     constructor() {
         super();
         this.parsers = Parsers.getInstance();
-        this.handler = new Handler(process.env.HORUS_DB, process.env.HORUS_DB_HOST,
-            parseInt(process.env.HORUS_DB_PORT, 10));
+        let database = new Database(process.env.STREAME_READ_DB, process.env.STREAME_READ_DB_HOST,
+            parseInt(process.env.STREAME_READ_DB_PORT, 10), process.env.STREAME_DB,
+            process.env.STREAME_DB);
+        let database2 = new Database(process.env.STREAME_EVENT_DB, process.env.STREAME_EVENT_DB_HOST,
+            parseInt(process.env.STREAME_EVENT_DB_PORT, 10), process.env.STREAME_DB,
+            process.env.STREAME_DB);
+        this.handler = new Handler(database, database2);
         this.gPS = new GPS(this.parsers.getParser(process.env.GPS_NMEA_SERIAL_PORT),
         this.parsers.getParser(process.env.GPS_AT_SERIAL_PORT), process.env.GPS_AT_COMMAND_INIT,
         process.env.GPS_AT_COMMAND_START, this.handler);
@@ -69,37 +74,37 @@ export class HardwareHandler extends BasicHardwareHandler {
         this.handler.addEvent(event);
     }
 
-    public addUsers(users) {
-        for (let index = 0; index < users.length; index++) {
-            let user = users[index];
-            this.addUser(user);
-        }
-    }
+    // public addUsers(users) {
+    //     for (let index = 0; index < users.length; index++) {
+    //         let user = users[index];
+    //         this.addUser(user);
+    //     }
+    // }
 
-    public setUsers(users) {
-        let _self = this;
-        this.handler.readArray('user', (error, data) => {
-            _self.clearUsers(data);
-            _self.addUsers(users);
-        });
-    }
+    // public setUsers(users) {
+    //     let _self = this;
+    //     this.handler.readArray('user', (error, data) => {
+    //         _self.clearUsers(data);
+    //         _self.addUsers(users);
+    //     });
+    // }
 
-    public getUsers(socket) {
-        let _self = this;
-        this.handler.readArray('user', (error, data) => {
-            _self.returnUsers(data, socket);
-        });
-    }
+    // public getUsers(socket) {
+    //     let _self = this;
+    //     this.handler.readArray('user', (error, data) => {
+    //         _self.returnUsers(data, socket);
+    //     });
+    // }
 
-    public returnUsers(data, socket) {
-        let users: Array<any> = new Array<any>();
-        for (let index = 0; index < data.length; index++) {
-            let element = JSON.parse(JSON.stringify(data[index]));//JSON.parse(data[index])
-            users.push(element.authentication.username);
-        }
-        // console.log('ERROR')
-        socket.emit('users', users);
-    }
+    // public returnUsers(data, socket) {
+    //     let users: Array<any> = new Array<any>();
+    //     for (let index = 0; index < data.length; index++) {
+    //         let element = JSON.parse(JSON.stringify(data[index]));//JSON.parse(data[index])
+    //         users.push(element.authentication.username);
+    //     }
+    //     // console.log('ERROR')
+    //     socket.emit('users', users);
+    // }
 
     public getSpace() {
         this.disk.getSpace();

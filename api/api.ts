@@ -10,7 +10,7 @@ export class Api extends BasicApi {
   constructor() {
     let hardwareHandler = new HardwareHandler();
     let webhookConnector = new WebhookConnector(process.env.WEEBHOOK_DB, process.env.GIT_REPOSITORY_USER,
-       process.env.GIT_REPOSITORY, process.env.GIT_URL, process.env.PRODUCTION, process.env.HORUS_MODEL,
+       process.env.GIT_REPOSITORY, process.env.GIT_URL, process.env.PRODUCTION, process.env.STREAME_MODEL,
        process.env.WEEBHOOK_DB_HOST, process.env.WEEBHOOK_DB_PORT);
     super(new AppHandler(hardwareHandler, webhookConnector), new ExternalHandler(hardwareHandler));
     this.webhookConnector = webhookConnector;

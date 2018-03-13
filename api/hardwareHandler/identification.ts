@@ -8,16 +8,16 @@ export class Identification {
     public model;
 
     constructor() {
-        if (process.env.HORUS_SERIAL_NUMBER) {
-            this.serialNumber = process.env.HORUS_SERIAL_NUMBER;
+        if (process.env.STREAME_SERIAL_NUMBER) {
+            this.serialNumber = process.env.STREAME_SERIAL_NUMBER;
         } else {
             let serial = uuidv1();
-            let line = '\n' + 'HORUS_SERIAL_NUMBER=' + serial;
+            let line = '\n' + 'STREAME_SERIAL_NUMBER=' + serial;
             fs.appendFileSync('.env', line);
             this.serialNumber = serial;
         }
 
         this.version = packageJson.version;
-        this.model = process.env.HORUS_MODEL;
+        this.model = process.env.STREAME_MODEL;
     }
 }
