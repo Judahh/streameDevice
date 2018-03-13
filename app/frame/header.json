@@ -16,6 +16,9 @@
                 },
                 {
                     "type": "ComponentRightHolder"
+                },
+                {
+                    "type": "ComponentNotification"
                 }
             ]
         }

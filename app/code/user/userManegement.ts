@@ -271,16 +271,16 @@ export class UserManegement extends AppObject {
         return (UserManegement.getInstance().logged !== undefined);
     }
 
-    public goToLogin() {
-        if (this !== undefined) {
-            if (!this.isLogged()) {
-                this.goTo('login');
-            }
-        } else {
-            if (!UserManegement.getInstance().isLogged()) {
-                UserManegement.getInstance().goTo('login');
-            }
-        }
+    public goToServer() {
+        // if (this !== undefined) {
+        //     if (!this.isLogged()) {
+        //         this.goTo('login');
+        //     }
+        // } else {
+        //     if (!UserManegement.getInstance().isLogged()) {
+        //         UserManegement.getInstance().goTo('login');
+        //     }
+        // }
     }
 
     public logout(component?) {
