@@ -33,11 +33,11 @@ function check() {
     let _self = this;
     img.onload = _self.isOnline;
     img.onerror = _self.isOffline;
-    img.src = 'http://localhost:3000/image/streame.svg';
+    img.src = 'http://localhost:3001/image/streame.svg';
 }
 
 function isOnline() {
-    window.location.href = 'http://localhost:3000';
+    window.location.href = 'http://localhost:3001';
 }
 
 function isOffline() {
