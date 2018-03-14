@@ -111,6 +111,13 @@ export class AppHandler extends BasicAppHandler {
         this.webhookConnector.upgrade(request.body);
     }
 
+    public serverConnected(basicSocket) {
+        this.hardwareHandler.externalSubscribe('server', (data) => {
+            console.log('APP RECEIVE CONNECTION');
+            basicSocket.emit('server', data);
+        });
+    }
+
     public configSocket(basicSocket: BasicSocket) {
         let _self = this;
         basicSocket.on('getUptime', () => { _self.getUptime(basicSocket); });
@@ -120,7 +127,10 @@ export class AppHandler extends BasicAppHandler {
         basicSocket.on('getSpace', () => { _self.getSpace(); });
 
         basicSocket.on('subscribeStream', () => { _self.appSubscribeStream('streamOut', basicSocket); });
-        basicSocket.on('stream', (stream) => { _self.appPublish('streamIn', stream); });
+        basicSocket.on('stream', (stream) => {
+            console.log('APP EMIT STREAM');
+            _self.appPublish('streamIn', stream);
+        });
 
 
         if (_self.checkVideos()) {
@@ -140,7 +150,9 @@ export class AppHandler extends BasicAppHandler {
         basicSocket.on('getWifiConnections', () => { _self.getWifiConnections(); });
         basicSocket.on('setWifiConnection', (data) => { _self.setWifiConnection(data); });
         basicSocket.on('subscribeWifi', () => { _self.subscribeWifi(basicSocket); });
-        basicSocket.on('connectToServer', (data) => { _self.hardwareHandler.appPublish('connectToServer', data); });
-        this.hardwareHandler.externalSubscribe('server', (data) => { basicSocket.emit('server', data) });
+        basicSocket.on('connectToServer', (data) => {
+            console.log('APP ASK TO CONNECT');
+             _self.appPublish('connectToServer', data);
+        });
     }
 }

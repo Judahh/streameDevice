@@ -70,7 +70,7 @@ export class Languages extends AppObject {
     public setLanguage(component) {
         // console.log('setLanguage!!');
         let languages = Languages.getLanguages();
-        console.log('RECEIVED!!', component);
+        // console.log('RECEIVED!!', component);
 
         let element: any = (<ComponentDataInput>component).getElement();
         let languageName = element.options[element.selectedIndex].text;

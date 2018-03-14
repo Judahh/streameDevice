@@ -89,35 +89,197 @@
                                                     "element": {
                                                         "value":"0"
                                                     },
-                                                    "information": "1280 x 720"
+                                                    "information": "3840 x 2160"
                                                 },
                                                 {
                                                     "type": "ComponentOption",
                                                     "element": {
                                                         "value":"1"
                                                     },
-                                                    "information": "960 x 800"
+                                                    "information": "1920 x 1080"
                                                 },
                                                 {
                                                     "type": "ComponentOption",
                                                     "element": {
                                                         "value":"2"
                                                     },
-                                                    "information": "720 x 480"
+                                                    "information": "1600 x 1200"
                                                 },
                                                 {
                                                     "type": "ComponentOption",
                                                     "element": {
                                                         "value":"3"
                                                     },
-                                                    "information": "640 x 480"
+                                                    "information": "1280 x 720"
                                                 },
                                                 {
                                                     "type": "ComponentOption",
                                                     "element": {
                                                         "value":"4"
                                                     },
+                                                    "information": "960 x 800"
+                                                },
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"5"
+                                                    },
+                                                    "information": "720 x 480"
+                                                },
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"6"
+                                                    },
+                                                    "information": "640 x 480"
+                                                },
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"7"
+                                                    },
                                                     "information": "320 x 240"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "ComponentDivisor",
+                            "element": {
+                                "style": {
+                                }
+                            },
+                            "arrayAppObject": [
+                                {
+                                    "type": "ComponentDataInput",
+                                    "element": {
+                                        "style": {
+                                            "display": "inline-flex",
+                                            "padding": "5px",
+                                            "width": "100%",
+                                            "box-sizing": "border-box"
+                                        }
+                                    },
+                                    "arrayAppObject": [
+                                        {
+                                            "type": "ComponentComboBox",
+                                            "element": {
+                                                "style": {
+                                                    "color": "white",
+                                                    "width": "100%",
+                                                    "border": "1px solid white",
+                                                    "opacity": 1
+                                                },
+                                                "placeholder": "facingMode"
+                                            },
+                                            "arrayAppObject": [
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"",
+                                                        "selected": true,
+                                                        "hidden": true,
+                                                        "disabled": true
+                                                    },
+                                                    "information": "facingMode"
+                                                },
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"0"
+                                                    },
+                                                    "information": "user"
+                                                },
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"1"
+                                                    },
+                                                    "information": "environment"
+                                                },
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"2"
+                                                    },
+                                                    "information": "left"
+                                                },
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"3"
+                                                    },
+                                                    "information": "right"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "ComponentDivisor",
+                            "element": {
+                                "style": {
+                                }
+                            },
+                            "arrayAppObject": [
+                                {
+                                    "type": "ComponentDataInput",
+                                    "element": {
+                                        "style": {
+                                            "display": "inline-flex",
+                                            "padding": "5px",
+                                            "width": "100%",
+                                            "box-sizing": "border-box"
+                                        }
+                                    },
+                                    "arrayAppObject": [
+                                        {
+                                            "type": "ComponentComboBox",
+                                            "element": {
+                                                "style": {
+                                                    "color": "white",
+                                                    "width": "100%",
+                                                    "border": "1px solid white",
+                                                    "opacity": 1
+                                                },
+                                                "placeholder": "format"
+                                            },
+                                            "arrayAppObject": [
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"",
+                                                        "selected": true,
+                                                        "hidden": true,
+                                                        "disabled": true
+                                                    },
+                                                    "information": "format"
+                                                },
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"0"
+                                                    },
+                                                    "information": "webm"
+                                                },
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"1"
+                                                    },
+                                                    "information": "mpeg4"
+                                                },
+                                                {
+                                                    "type": "ComponentOption",
+                                                    "element": {
+                                                        "value":"2"
+                                                    },
+                                                    "information": "x-matroska"
                                                 }
                                             ]
                                         }
@@ -154,6 +316,53 @@
                                                 "placeholder": "duration",
                                                 "type":"number"
                                             }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "ComponentDivisor",
+                            "element": {
+                                "style": {
+                                }
+                            },
+                            "arrayAppObject": [
+                                {
+                                    "type": "ComponentDataInput",
+                                    "element": {
+                                        "style": {
+                                            "display": "inline-flex",
+                                            "padding": "5px",
+                                            "width": "100%",
+                                            "box-sizing": "border-box"
+                                        }
+                                    },
+                                    "arrayAppObject": [
+                                        {
+                                            "type": "ComponentBox",
+                                            "element": {
+                                                "style": {
+                                                    "color": "white",
+                                                    "border-bottom": "1px solid white",
+                                                    "opacity": 1
+                                                },
+                                                "placeholder": "audio",
+                                                "type":"checkbox"
+                                            },
+                                            "arrayAppObject": [
+                                                {
+                                                    "type": "ComponentInformation",
+                                                    "element": {
+                                                        "style": {
+                                                            "color": "white",
+                                                            "border-bottom": "1px solid white",
+                                                            "opacity": 1
+                                                        }
+                                                    },
+                                                    "information": "audio"
+                                                }
+                                            ]
                                         }
                                     ]
                                 }

@@ -12,15 +12,17 @@ export class ExternalHandler extends BasicExternalHandler {
     public init() {
         let _self = this;
         this.hardwareHandler.appSubscribe('connectToServer', (data) => {
+            console.log('START CONNECTION TO SERVER');
             _self.connectToServer(data.address, HardwareHandler.getIdentification());
         });
     }
 
     protected clientConnected(basicSocket) {
         console.log('ID:', basicSocket.getIdentification());
-        console.log('CONNECTED');
-        this.hardwareHandler.externalPublish('server', { server: basicSocket.getIdentification() });
+        // console.log('CONNECTED');
         basicSocket.emit('subscribeStream', {});
+        console.log('SERVER CONNECTED');
+        this.hardwareHandler.externalPublish('server', { server: basicSocket.getIdentification() });
         // basicSocket.emit('subscribeUser', {});
         // basicSocket.emit('subscribeRemoveUser', {});
         // basicSocket.emit('subscribeUsers', {});
@@ -95,6 +97,7 @@ export class ExternalHandler extends BasicExternalHandler {
 
     public appSubscribeStream(subscribers, socket) {
         this.hardwareHandler.appSubscribe(subscribers, (data) => {
+            console.log('STREAM SENT');
             socket.emit('stream', data);
         });
     }

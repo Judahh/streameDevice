@@ -2,6 +2,7 @@ import { AppObject, Component } from 'backappjh';
 import { BasicSocket, UniqueSocket } from 'basicsocket';
 import { Disk } from './../disk/disk';
 import * as freeice from 'freeice';
+import * as adapter from 'webrtc-adapter';
 declare var MediaRecorder: any;
 declare var AudioContext: any;
 
@@ -56,7 +57,7 @@ export class Stream extends AppObject {
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             navigator.mediaDevices.getUserMedia({ video: _self.video, audio: _self.audio }).then((stream) => {
                 _self.stream = stream;
-                _self.publish(stream);
+                // _self.publish(stream);
                 _self.configStream(stream);
                 _self.startRecording();
             });
@@ -86,6 +87,22 @@ export class Stream extends AppObject {
 
     public getDuration() {
         return this.duration;
+    }
+
+    public setAudio(audio: boolean) {
+        this.audio = audio;
+    }
+
+    public getAudio() {
+        return this.audio;
+    }
+
+    public setFormat(format: string) {
+        this.format = format;
+    }
+
+    public getFormat() {
+        return this.format;
     }
 
     public setVideo(video: any) {
@@ -150,6 +167,10 @@ export class Stream extends AppObject {
         (<any>(<Component>component).getElement()).src = window.URL.createObjectURL(stream);
     }
 
+    public startStream() {
+        this.configStream(this.stream);
+    }
+
     private init() {
         let _self = this;
         _self.subscribers = new Array<any>();
@@ -162,11 +183,8 @@ export class Stream extends AppObject {
                 { url: 'turn:71.6.135.115:3479', username: 'test', credential: 'tester' }
             ]
         };
-        _self.streamConnection = new webkitRTCPeerConnection(_self.configuration) || new RTCPeerConnection(_self.configuration);
+        _self.streamConnection = new RTCPeerConnection(_self.configuration);
         // console.log('STREAM:', _self.streamConnection);
-        _self.socketIo.on('server', (stream) => {
-            _self.setVideo(_self.video);
-        });
         _self.socketIo.on('stream', (stream) => {
             if (stream.answer) {
                 console.log('answer!!!');

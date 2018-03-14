@@ -1,0 +1,22 @@
+[
+    {
+        "language":"en",
+        "stream":"STREAM",
+        "address":"Address"
+    },
+    {
+        "language":"en-US",
+        "stream":"STREAM",
+        "address":"Address"
+    },
+    {
+        "language":"pt",
+        "stream":"INICIAR",
+        "address":"Endereço"
+    },
+    {
+        "language":"pt-BR",
+        "stream":"INICIAR",
+        "address":"Endereço"
+    }
+]

@@ -9,7 +9,7 @@ export class Time extends AppObject {
     }
 
     public getTime(component) {
-        console.log('RUN TIME!!', component);
+        // console.log('RUN TIME!!', component);
         let today = new Date();
         let hours = today.getHours();
         let m: number = today.getMinutes();

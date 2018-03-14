@@ -453,6 +453,11 @@ export class UserManegement extends AppObject {
         _self.socketIo.on('users', (data) => { _self.publish({ users: data }); });
 
         _self.socketIo.emit('getDevices', {});
+
+        _self.socketIo.on('server', (stream) => {
+            console.log('new SERVER');
+            _self.goTo('stream');
+        });
     }
 
     private goTo(page: string) {
