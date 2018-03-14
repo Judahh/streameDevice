@@ -54,12 +54,17 @@ export class Stream extends AppObject {
         console.log('STREAM!!!');
         let _self = this;
         _self.disk = Disk.getInstance();
+        console.log('New Video:', _self.video);
+        console.log('New Audio:', _self.audio);
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             navigator.mediaDevices.getUserMedia({ video: _self.video, audio: _self.audio }).then((stream) => {
                 _self.stream = stream;
+                console.log('New Stream:', stream);
                 // _self.publish(stream);
-                _self.configStream(stream);
-                _self.startRecording();
+                // _self.configStream(stream);
+                // _self.startRecording();
+            }).catch((error) => {
+                console.error(error);
             });
         } else {
             console.error('cam failed');
@@ -110,13 +115,17 @@ export class Stream extends AppObject {
         this.video = video;
         let _self = this;
         // _self.streamRecorder.stop();
+        console.log('New Video:', _self.video);
+        console.log('New Audio:', _self.audio);
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             navigator.mediaDevices.getUserMedia({ video: _self.video, audio: _self.audio }).then((stream) => {
+                console.log('New Stream:', stream);
                 _self.stream = stream;
                 // console.log(_self.stream);
                 _self.configStream(stream);
                 _self.startRecording();
             }).catch((error) => {
+                console.error(error);
                 _self.setVideo(oldVideo);
             });
         } else {
