@@ -73,16 +73,18 @@ export class Stream extends AppObject {
 
     public startRecording() {
         let _self = this;
-        if (_self.duration > 0) {
-            console.log('Start Record!!!');
-            _self.streamRecorder = new MediaRecorder(_self.stream, {
-                mimeType: ('video/' + _self.format)
-            });
-            _self.streamRecorder.start();
-            _self.streamRecorder.ondataavailable = (e) => {
-                _self.postVideoToServer(e.data);
-            };
-            setTimeout(() => { _self.restartRecording(); }, _self.duration);
+        if (_self.stream !== undefined) {
+            if (_self.duration > 0) {
+                console.log('Start Record!!!');
+                _self.streamRecorder = new MediaRecorder(_self.stream, {
+                    mimeType: ('video/' + _self.format)
+                });
+                _self.streamRecorder.start();
+                _self.streamRecorder.ondataavailable = (e) => {
+                    _self.postVideoToServer(e.data);
+                };
+                setTimeout(() => { _self.restartRecording(); }, _self.duration);
+            }
         }
     }
 
@@ -122,8 +124,8 @@ export class Stream extends AppObject {
                 console.log('New Stream:', stream);
                 _self.stream = stream;
                 // console.log(_self.stream);
-                _self.configStream(stream);
-                _self.startRecording();
+                // _self.configStream(stream);
+                // _self.startRecording();
             }).catch((error) => {
                 console.error(error);
                 _self.setVideo(oldVideo);
@@ -220,30 +222,31 @@ export class Stream extends AppObject {
     private configStream(stream) {
         console.log('configStream!');
         let _self = this;
+        if (_self.stream !== undefined) {
+            // setup stream listening
+            _self.streamConnection.addStream(stream);
 
-        // setup stream listening
-        _self.streamConnection.addStream(stream);
+            // Setup ice handling
+            _self.streamConnection.onicecandidate = (event) => {
+                // console.log('ICE!', event);
+                if (event.candidate) {
+                    console.log('onCandidate', event.candidate);
+                    _self.socketIo.emit('stream', { candidate: event.candidate });
+                }
 
-        // Setup ice handling
-        _self.streamConnection.onicecandidate = (event) => {
-            // console.log('ICE!', event);
-            if (event.candidate) {
-                console.log('onCandidate', event.candidate);
-                _self.socketIo.emit('stream', { candidate: event.candidate });
-            }
+            };
 
-        };
-
-        _self.streamConnection.createOffer(
-            (offer) => {
-                console.log('CREATE OFFER!');
-                _self.socketIo.emit('stream', { offer: offer });
-                _self.streamConnection.setLocalDescription(offer);
-            },
-            (error) => {
-                console.error('ERROR OFFER!', error);
-            }
-        );
+            _self.streamConnection.createOffer(
+                (offer) => {
+                    console.log('CREATE OFFER!');
+                    _self.socketIo.emit('stream', { offer: offer });
+                    _self.streamConnection.setLocalDescription(offer);
+                },
+                (error) => {
+                    console.error('ERROR OFFER!', error);
+                }
+            );
+        }
     }
 
     private handleAnswer(answer) {
