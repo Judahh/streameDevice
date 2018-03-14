@@ -10,16 +10,20 @@ export class ExternalHandler extends BasicExternalHandler {
     }
 
     public init() {
-        this.connectToServer(process.env.SERVER_ADDRESS, HardwareHandler.getIdentification());
+        let _self = this;
+        this.hardwareHandler.appSubscribe('connectToServer', (data) => {
+            _self.connectToServer(data.address, HardwareHandler.getIdentification());
+        });
     }
 
     protected clientConnected(basicSocket) {
         console.log('ID:', basicSocket.getIdentification());
         console.log('CONNECTED');
+        this.hardwareHandler.externalPublish('server', { server: basicSocket.getIdentification() });
         basicSocket.emit('subscribeStream', {});
-        basicSocket.emit('subscribeUser', {});
-        basicSocket.emit('subscribeRemoveUser', {});
-        basicSocket.emit('subscribeUsers', {});
+        // basicSocket.emit('subscribeUser', {});
+        // basicSocket.emit('subscribeRemoveUser', {});
+        // basicSocket.emit('subscribeUsers', {});
     }
 
     public getUptime(socket) {

@@ -24,6 +24,7 @@ export class HardwareHandler extends BasicHardwareHandler {
     private parsers: Parsers;
     private handler: Handler;
     private appSubscribers: any;
+    private externalSubscribers: any;
 
     public static getIdentification() {
         return HardwareHandler.identification;
@@ -53,6 +54,7 @@ export class HardwareHandler extends BasicHardwareHandler {
         // this.handler.readOne('samples', 0,(error, result: Array<any>)=>{});
         // this.getCaptcha();
         this.appSubscribers = {};
+        this.externalSubscribers = {};
         // try {
         //     let i2c = new I2C(0x77);
         // } catch (error) {
@@ -212,6 +214,26 @@ export class HardwareHandler extends BasicHardwareHandler {
         });
     }
 
+    public externalSubscribe(subscribers, callback) {
+        this.checkExternalSubscribers(subscribers);
+        this.externalSubscribers[subscribers].push(callback);
+        console.log(callback.name, 'has been subscribed to', subscribers);
+    }
+
+    public externalUnsubscribe(subscribers, callback) {
+        this.checkExternalSubscribers(subscribers);
+        this.externalSubscribers[subscribers] = this.externalSubscribers[subscribers].filter((element) => {
+            return element !== callback;
+        });
+    }
+
+    public externalPublish(subscribers, data) {
+        this.checkExternalSubscribers(subscribers);
+        this.externalSubscribers[subscribers].forEach((subscriber) => {
+            subscriber(data);
+        });
+    }
+
     public getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
@@ -250,6 +272,12 @@ export class HardwareHandler extends BasicHardwareHandler {
     private checkAppSubscribers(subscribers) {
         if (this.appSubscribers[subscribers] === undefined) {
             this.appSubscribers[subscribers] = new Array<any>();
+        }
+    }
+
+    private checkExternalSubscribers(subscribers) {
+        if (this.externalSubscribers[subscribers] === undefined) {
+            this.externalSubscribers[subscribers] = new Array<any>();
         }
     }
 }

@@ -140,5 +140,7 @@ export class AppHandler extends BasicAppHandler {
         basicSocket.on('getWifiConnections', () => { _self.getWifiConnections(); });
         basicSocket.on('setWifiConnection', (data) => { _self.setWifiConnection(data); });
         basicSocket.on('subscribeWifi', () => { _self.subscribeWifi(basicSocket); });
+        basicSocket.on('connectToServer', (data) => { _self.hardwareHandler.appPublish('connectToServer', data); });
+        this.hardwareHandler.externalSubscribe('server', (data) => { basicSocket.emit('server', data) });
     }
 }

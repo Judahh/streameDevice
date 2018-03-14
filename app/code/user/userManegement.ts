@@ -104,12 +104,11 @@ export class UserManegement extends AppObject {
         let divisor: Component = <Component>(<ComponentPageBody>component.getFather().getFather().getFather());
         let arrayField: Array<HTMLInputElement> = new Array<HTMLInputElement>();
         arrayField.push(<HTMLInputElement>(<Component>divisor.arrayAppObject[0].arrayAppObject[0].arrayAppObject[0]).getElement());
-        arrayField.push(<HTMLInputElement>(<Component>divisor.arrayAppObject[1].arrayAppObject[0].arrayAppObject[0]).getElement());
-        console.log(divisor, arrayField[0].value, arrayField[1].value);
+        console.log(divisor, arrayField[0].value);
         if (!this.checkArrayEmpty(arrayField)) {
             let header = divisor.getHeader();
             (<ComponentNotification>header.arrayAppObject[1]).goToNotification('none');
-            this.socketIo.emit('signIn', { username: arrayField[0].value, password: arrayField[1].value });
+            this.socketIo.emit('connectToServer', { address: arrayField[0].value });
         } else {
             let header = divisor.getHeader();
             (<ComponentNotification>header.arrayAppObject[1]).goToNotification('missingFields');

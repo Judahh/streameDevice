@@ -164,6 +164,9 @@ export class Stream extends AppObject {
         };
         _self.streamConnection = new webkitRTCPeerConnection(_self.configuration) || new RTCPeerConnection(_self.configuration);
         // console.log('STREAM:', _self.streamConnection);
+        _self.socketIo.on('server', (stream) => {
+            _self.setVideo(_self.video);
+        });
         _self.socketIo.on('stream', (stream) => {
             if (stream.answer) {
                 console.log('answer!!!');
