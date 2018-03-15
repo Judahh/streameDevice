@@ -32,6 +32,8 @@ export class HardwareHandler extends BasicHardwareHandler {
 
     constructor() {
         super();
+        this.appSubscribers = {};
+        this.externalSubscribers = {};
         this.parsers = Parsers.getInstance();
         // let database = new Database(process.env.STREAME_READ_DB, process.env.STREAME_READ_DB_HOST,
         //     parseInt(process.env.STREAME_READ_DB_PORT, 10), process.env.STREAME_DB,
@@ -53,8 +55,6 @@ export class HardwareHandler extends BasicHardwareHandler {
         // this.handler.readById('samples', 0,(error, result: Array<any>)=>{});
         // this.handler.readOne('samples', 0,(error, result: Array<any>)=>{});
         // this.getCaptcha();
-        this.appSubscribers = {};
-        this.externalSubscribers = {};
         // try {
         //     let i2c = new I2C(0x77);
         // } catch (error) {
