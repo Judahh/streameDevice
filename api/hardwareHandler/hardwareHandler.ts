@@ -33,18 +33,18 @@ export class HardwareHandler extends BasicHardwareHandler {
     constructor() {
         super();
         this.parsers = Parsers.getInstance();
-        let database = new Database(process.env.STREAME_READ_DB, process.env.STREAME_READ_DB_HOST,
-            parseInt(process.env.STREAME_READ_DB_PORT, 10), process.env.STREAME_DB,
-            process.env.STREAME_DB);
-        let database2 = new Database(process.env.STREAME_EVENT_DB, process.env.STREAME_EVENT_DB_HOST,
-            parseInt(process.env.STREAME_EVENT_DB_PORT, 10), process.env.STREAME_DB,
-            process.env.STREAME_DB);
-        this.handler = new Handler(database, database2);
-        this.gPS = new GPS(this.parsers.getParser(process.env.GPS_NMEA_SERIAL_PORT),
-        this.parsers.getParser(process.env.GPS_AT_SERIAL_PORT), process.env.GPS_AT_COMMAND_INIT,
-        process.env.GPS_AT_COMMAND_START, this.handler);
-        this.gSM = new GSM(this.parsers.getParser(process.env.GSM_AT_SERIAL_PORT),
-        process.env.GSM_AT_COMMAND_SIGNAL, process.env.GSM_AT_COMMAND_TYPE, parseInt(process.env.GSM_AT_COMMAND_DELAY, 10), this.handler);
+        // let database = new Database(process.env.STREAME_READ_DB, process.env.STREAME_READ_DB_HOST,
+        //     parseInt(process.env.STREAME_READ_DB_PORT, 10), process.env.STREAME_DB,
+        //     process.env.STREAME_DB);
+        // let database2 = new Database(process.env.STREAME_EVENT_DB, process.env.STREAME_EVENT_DB_HOST,
+        //     parseInt(process.env.STREAME_EVENT_DB_PORT, 10), process.env.STREAME_DB,
+        //     process.env.STREAME_DB);
+        // this.handler = new Handler(database, database2);
+        // this.gPS = new GPS(this.parsers.getParser(process.env.GPS_NMEA_SERIAL_PORT),
+        // this.parsers.getParser(process.env.GPS_AT_SERIAL_PORT), process.env.GPS_AT_COMMAND_INIT,
+        // process.env.GPS_AT_COMMAND_START, this.handler);
+        // this.gSM = new GSM(this.parsers.getParser(process.env.GSM_AT_SERIAL_PORT),
+        // process.env.GSM_AT_COMMAND_SIGNAL, process.env.GSM_AT_COMMAND_TYPE, parseInt(process.env.GSM_AT_COMMAND_DELAY, 10), this.handler);
         this.wifi = new Wifi(parseInt(process.env.WIFI_REFRESH_DELAY, 10), this.handler);
         this.disk = new Disk(this.handler);
         // HANDLER SAMPLE

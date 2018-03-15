@@ -8,15 +8,15 @@ import * as fs from 'fs';
 export class Disk implements Observer {
     private subscribers: Array<any>;
 
-    private handler: Handler;
+    // private handler: Handler;
 
     private lastDisk;
 
-    constructor(handler: Handler) {
+    constructor(handler?: Handler) {
         this.subscribers = new Array();
-        this.handler = handler;
+        // this.handler = handler;
         let _self = this;
-        this.handler.readOne('disks', {}, _self.getLastDisk);
+        // this.handler.readOne('disks', {}, _self.getLastDisk);
     }
 
     public getSpace() {
@@ -110,7 +110,7 @@ export class Disk implements Observer {
             if (this.lastDisk === undefined) {
                 console.log('new lastDisk');
                 let event: Event = new Event(Operation.add, 'disk', {});
-                this.handler.addEvent(event);
+                // this.handler.addEvent(event);
             }
             console.log('lastDisk', this.lastDisk);
         }
@@ -119,7 +119,7 @@ export class Disk implements Observer {
     private updateLastDisk(lastDisk) {
         this.lastDisk = lastDisk;
         let event: Event = new Event(Operation.update, 'disk', this.lastDisk);
-        this.handler.addEvent(event);
+        // this.handler.addEvent(event);
     }
 
     private error(error) {
