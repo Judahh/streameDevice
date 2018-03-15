@@ -18,11 +18,11 @@ export class GSM implements Observer {
 
   private delay: number;
 
-  private handler: Handler;
+  // private handler: Handler;
 
   private lastGSM;
 
-  constructor(parser: Parser, atCommandSignal, atCommandType, delay: number, handler: Handler) {
+  constructor(parser: Parser, atCommandSignal, atCommandType, delay: number, handler?: Handler) {
     this.atCommandSignal = atCommandSignal;
     this.atCommandType = atCommandType;
     this.parser = parser;
@@ -30,9 +30,9 @@ export class GSM implements Observer {
     this.isStarted = false;
     this.portError = false;
     this.delay = delay;
-    this.handler = handler;
+    // this.handler = handler;
     let _self = this;
-    this.handler.readOne('gSMs', {}, _self.getLastGSM);
+    // this.handler.readOne('gSMs', {}, _self.getLastGSM);
     this.signalStart();
     this.init();
   }
@@ -92,8 +92,8 @@ export class GSM implements Observer {
       this.lastGSM = result;
       if (this.lastGSM === undefined) {
         console.log('new lastGSM');
-        let event: Event = new Event(Operation.add, 'gSM', {});
-        this.handler.addEvent(event);
+        // let event: Event = new Event(Operation.add, 'gSM', {});
+        // this.handler.addEvent(event);
       }
       console.log('lastGSM', this.lastGSM);
     }
@@ -113,8 +113,8 @@ export class GSM implements Observer {
     }
 
 
-    let event: Event = new Event(Operation.update, 'gSM', this.lastGSM);
-    this.handler.addEvent(event);
+    // let event: Event = new Event(Operation.update, 'gSM', this.lastGSM);
+    // this.handler.addEvent(event);
   }
 
   private error(error) {

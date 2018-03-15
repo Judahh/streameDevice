@@ -15,11 +15,11 @@ export class GPS implements Observer {
 
   private isStarted;
 
-  private handler: Handler;
+  // private handler: Handler;
 
   private lastGPS;
 
-  constructor(nmeaParser: Parser, atParser: Parser, atCommandInit, atCommandStart, handler: Handler) {
+  constructor(nmeaParser: Parser, atParser: Parser, atCommandInit, atCommandStart, handler?: Handler) {
     this.isStarted = false;
     this.atCommandInit = atCommandInit;
     this.atCommandStart = atCommandStart;
@@ -27,9 +27,9 @@ export class GPS implements Observer {
     this.atParser = atParser;
     this.nmea = new NMEA;
     this.subscribers = new Array();
-    this.handler = handler;
+    // this.handler = handler;
     let _self = this;
-    this.handler.readOne('gPS', {}, _self.getLastGPS);
+    // this.handler.readOne('gPS', {}, _self.getLastGPS);
     this.init();
   }
 
@@ -120,8 +120,8 @@ export class GPS implements Observer {
       this.lastGPS = result;
       if (this.lastGPS === undefined) {
         console.log('new lastGPS');
-        let event: Event = new Event(Operation.add, 'gPS', {});
-        this.handler.addEvent(event);
+        // let event: Event = new Event(Operation.add, 'gPS', {});
+        // this.handler.addEvent(event);
       }
       console.log('lastGPS', this.lastGPS);
     }
@@ -129,8 +129,8 @@ export class GPS implements Observer {
 
   private updateLastGPS(gPS) {
     this.lastGPS = gPS;
-    let event: Event = new Event(Operation.update, 'gPS', this.lastGPS);
-    this.handler.addEvent(event);
+    // let event: Event = new Event(Operation.update, 'gPS', this.lastGPS);
+    // this.handler.addEvent(event);
   }
 
   private error(error) {
