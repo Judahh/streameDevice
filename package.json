@@ -22,8 +22,8 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "postinstall": "tsc",
-    "prestart": "webpack",
+    "postinstall": "tsc && webpack",
+    "prestart": "",
     "start": "node .",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
