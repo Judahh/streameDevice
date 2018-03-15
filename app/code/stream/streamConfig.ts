@@ -34,7 +34,7 @@ export class StreamConfig extends AppObject {
 
         let stream = Stream.getInstance();
         stream.setDuration(parseInt(duration, 10));
-        stream.setAudio(audio);
+        // stream.setAudio(audio);
         stream.setFormat(formatSelected);
         let video = {
             'width': parseInt(array[0], 10),
@@ -44,7 +44,7 @@ export class StreamConfig extends AppObject {
         // console.log('video:', video);
         // console.log('duration:', duration);
 
-        stream.setVideo(video);
+        stream.startVideo(video, audio);
         // _self.stream.setWifiConnection((data) => { _self.response(data); }, { ssid: resolutionSelected, password: password });
     }
 

@@ -50,44 +50,6 @@ export class Stream extends AppObject {
         });
     }
 
-    public run() {
-        console.log('STREAM!!!');
-        let _self = this;
-        _self.disk = Disk.getInstance();
-        console.log('New Video:', _self.video);
-        console.log('New Audio:', _self.audio);
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: _self.video, audio: _self.audio }).then((stream) => {
-                _self.stream = stream;
-                console.log('New Stream:', stream);
-                // _self.publish(stream);
-                // _self.configStream(stream);
-                // _self.startRecording();
-            }).catch((error) => {
-                console.error(error);
-            });
-        } else {
-            console.error('cam failed');
-        }
-    }
-
-    public startRecording() {
-        let _self = this;
-        if (_self.stream !== undefined) {
-            if (_self.duration > 0) {
-                console.log('Start Record!!!');
-                _self.streamRecorder = new MediaRecorder(_self.stream, {
-                    mimeType: ('video/' + _self.format)
-                });
-                _self.streamRecorder.start();
-                _self.streamRecorder.ondataavailable = (e) => {
-                    _self.postVideoToServer(e.data);
-                };
-                setTimeout(() => { _self.restartRecording(); }, _self.duration);
-            }
-        }
-    }
-
     public setDuration(duration: number) {
         this.duration = duration;
     }
@@ -112,10 +74,18 @@ export class Stream extends AppObject {
         return this.format;
     }
 
-    public setVideo(video: any) {
-        let oldVideo = this.video;
-        this.video = video;
+    public startVideo(video?: any, audio?: boolean) {
         let _self = this;
+        let oldVideo = _self.video;
+        let oldAudio = _self.audio;
+
+        if (video !== undefined) {
+            _self.video = video;
+        }
+        if (audio !== undefined) {
+            _self.audio = audio;
+        }
+
         // _self.streamRecorder.stop();
         console.log('New Video:', _self.video);
         console.log('New Audio:', _self.audio);
@@ -128,7 +98,7 @@ export class Stream extends AppObject {
                 // _self.startRecording();
             }).catch((error) => {
                 console.error(error);
-                _self.setVideo(oldVideo);
+                _self.startVideo(oldVideo, oldAudio);
             });
         } else {
             console.error('cam failed');
@@ -137,6 +107,28 @@ export class Stream extends AppObject {
 
     public getVideo() {
         return this.video;
+    }
+
+    public startRecording() {
+        let _self = this;
+        if (_self.stream !== undefined) {
+            if (_self.duration > 0) {
+                let type = 'audio';
+                console.log('Start Record!!!');
+                if (_self.video !== undefined) {
+                    type = 'video';
+                }
+                _self.streamRecorder = new MediaRecorder(_self.stream, {
+
+                    mimeType: (type + '/' + _self.format)
+                });
+                _self.streamRecorder.start();
+                _self.streamRecorder.ondataavailable = (e) => {
+                    _self.postVideoToServer(e.data);
+                };
+                setTimeout(() => { _self.restartRecording(); }, _self.duration);
+            }
+        }
     }
 
     public restartRecording() {

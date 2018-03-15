@@ -17,7 +17,7 @@
                 "audio": true,
                 "duration": 0
             },
-            "runFunction": "run()",
+            "runFunction": "startVideo()",
             "code": "Stream"
         }
     ],
