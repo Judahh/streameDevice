@@ -14,6 +14,9 @@ export class Wifi implements Observer {
     constructor(delay: number, handler?: Handler) {
         wifi.init();
         this.subscribers = new Array();
+        if (delay === undefined || delay < 1000) {
+            delay = 1000;
+        }
         this.delay = delay;
         // this.handler = handler;
         let _self = this;
@@ -61,7 +64,7 @@ export class Wifi implements Observer {
     }
 
     public subscribe(callback) {
-         // we could check to see if it is already subscribed
+        // we could check to see if it is already subscribed
         this.subscribers.push(callback);
         console.log(callback.name, 'has been subscribed to WIFI');
     }
