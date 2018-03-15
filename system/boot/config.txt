@@ -57,3 +57,5 @@ dtparam=audio=on
 
 #display_rotate=1
 lcd_rotate=1
+
+smsc95xx.macaddr=F6:3D:04:6A:40:7B
