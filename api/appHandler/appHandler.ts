@@ -5,7 +5,7 @@ import { WebhookConnector } from 'webhookconnector';
 export class AppHandler extends BasicAppHandler {
     private webhookConnector: WebhookConnector;
 
-    constructor(hardwareHandler: HardwareHandler, webhookConnector: WebhookConnector) {
+    constructor(hardwareHandler: HardwareHandler, webhookConnector?: WebhookConnector) {
         super(hardwareHandler);
         this.webhookConnector = webhookConnector;
     }

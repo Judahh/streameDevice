@@ -9,11 +9,11 @@ export class Api extends BasicApi {
 
   constructor() {
     let hardwareHandler = new HardwareHandler();
-    let webhookConnector = new WebhookConnector(process.env.WEEBHOOK_DB, process.env.GIT_REPOSITORY_USER,
-       process.env.GIT_REPOSITORY, process.env.GIT_URL, process.env.PRODUCTION, process.env.STREAME_MODEL,
-       process.env.WEEBHOOK_DB_HOST, process.env.WEEBHOOK_DB_PORT);
-    super(new AppHandler(hardwareHandler, webhookConnector), new ExternalHandler(hardwareHandler));
-    this.webhookConnector = webhookConnector;
+    // let webhookConnector = new WebhookConnector(process.env.WEEBHOOK_DB, process.env.GIT_REPOSITORY_USER,
+    //    process.env.GIT_REPOSITORY, process.env.GIT_URL, process.env.PRODUCTION, process.env.STREAME_MODEL,
+    //    process.env.WEEBHOOK_DB_HOST, process.env.WEEBHOOK_DB_PORT);
+    super(new AppHandler(hardwareHandler), new ExternalHandler(hardwareHandler));
+    // this.webhookConnector = webhookConnector;
     this.webhookConnector.startNgrok();
     this.electron = new Electron(process.env.ELECTRON_TOUCH, process.env.ELECTRON_TOUCH_SIMULATE, process.env.ELECTRON_FRAME,
       process.env.ELECTRON_KIOSK, process.env.ELECTRON_NODE, process.env.ELECTRON_WIDTH, process.env.ELECTRON_HEIGHT,
