@@ -14,7 +14,7 @@ export class Api extends BasicApi {
     //    process.env.WEEBHOOK_DB_HOST, process.env.WEEBHOOK_DB_PORT);
     super(new AppHandler(hardwareHandler), new ExternalHandler(hardwareHandler));
     // this.webhookConnector = webhookConnector;
-    this.webhookConnector.startNgrok();
+    // this.webhookConnector.startNgrok();
     this.electron = new Electron(process.env.ELECTRON_TOUCH, process.env.ELECTRON_TOUCH_SIMULATE, process.env.ELECTRON_FRAME,
       process.env.ELECTRON_KIOSK, process.env.ELECTRON_NODE, process.env.ELECTRON_WIDTH, process.env.ELECTRON_HEIGHT,
       process.env.ELECTRON_FULLSCREEN, process.env.ELECTRON_USE_CONTENT_SIZE, process.env.ELECTRON_AUTO_HIDE_MENU_BAR,
