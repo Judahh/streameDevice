@@ -59,11 +59,13 @@ if (JSON.parse(process.env.WEBPACK_PRODUCTION)) {
             parallel: true
         })
     );
-    config.plugins.push(
-        new CompressionPlugin({
-            minRatio: 1
-        })
-    );
+    if (JSON.parse(process.env.JS_COMPRESSION)) {
+        config.plugins.push(
+            new CompressionPlugin({
+                minRatio: 1
+            })
+        );
+    }
 } else {
     console.log('Development');
     config.devtool = 'inline-source-map'

@@ -1,1 +1,1 @@
-dwc_otg.lpm_enable=0 console=serial0,115200 console=tty3 root=PARTUUID=8f7bc405-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait quiet splash loglevel=0 logo.nologo vt.global_cursor_default=0 disable_splash=1 plymouth.ignore-serial-consoles
+dwc_otg.lpm_enable=0 console=serial0,115200 console=tty1 root=PARTUUID=8f7bc405-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait quiet splash loglevel=0 logo.nologo vt.global_cursor_default=0 disable_splash=1 plymouth.ignore-serial-consoles
