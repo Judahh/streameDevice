@@ -32,6 +32,14 @@
                     "align-items": "center"
                 }
             },
+            "arrayAppObjectEvent": [
+                {
+                    "name": "build",
+                    "appObject": {},
+                    "runFunction": "checkStream()",
+                    "code": "Stream"
+                }
+            ],
             "arrayAppObject": [
                 {
                     "type": "ComponentDivisor",

@@ -3,6 +3,7 @@ import { BasicSocket, UniqueSocket } from 'basicsocket';
 import { Disk } from './../disk/disk';
 import * as freeice from 'freeice';
 import * as adapter from 'webrtc-adapter';
+import { UserManegement } from '../user/userManegement';
 declare var MediaRecorder: any;
 declare var AudioContext: any;
 
@@ -72,6 +73,12 @@ export class Stream extends AppObject {
 
     public getFormat() {
         return this.format;
+    }
+
+    public checkStream() {
+        if (this.stream === undefined) {
+            UserManegement.getInstance().goTo('cameraSettings');
+        }
     }
 
     public startVideo(video?: any, audio?: boolean) {

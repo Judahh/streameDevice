@@ -1,4 +1,7 @@
-import { AppObject, Component, ComponentItem, ComponentDataInput, ComponentOption, ComponentPageBody, ComponentView, ComponentComboBox, ComponentInformation, AppObjectEvent, ComponentNotification } from 'backappjh';
+import {
+    AppObject, Component, ComponentItem, ComponentDataInput, ComponentOption, ComponentPageBody,
+    ComponentView, ComponentComboBox, ComponentInformation, AppObjectEvent, ComponentNotification
+} from 'backappjh';
 import { BasicSocket, UniqueSocket } from 'basicsocket';
 import { User } from './user';
 import { Authentication } from './authentication';
@@ -14,6 +17,7 @@ export class UserManegement extends AppObject {
     private logged: User;
     private tempRegister: User;
     private menu: any;
+    private server: any;
     private tempObjectArray: Array<any>;
 
     public static getInstance(father?: Component): UserManegement {
@@ -270,16 +274,12 @@ export class UserManegement extends AppObject {
         return (UserManegement.getInstance().logged !== undefined);
     }
 
-    public goToServer() {
-        // if (this !== undefined) {
-        //     if (!this.isLogged()) {
-        //         this.goTo('login');
-        //     }
-        // } else {
-        //     if (!UserManegement.getInstance().isLogged()) {
-        //         UserManegement.getInstance().goTo('login');
-        //     }
-        // }
+    public checkServer() {
+        if (this.hasServer) {
+            this.goTo('stream');
+        } else {
+            this.goTo('server');
+        }
     }
 
     public logout(component?) {
@@ -435,6 +435,30 @@ export class UserManegement extends AppObject {
         this.tempObjectArray = tempObjectArray;
     }
 
+    public hasServer() {
+        return (this.server !== undefined);
+    }
+
+    public goTo(page: string) {
+        let header;
+        let pageBody;
+        if (this !== undefined) {
+            header = this.getHeader();
+            pageBody = this.getPageBody();
+        } else {
+            header = UserManegement.getInstance().getHeader();
+            pageBody = UserManegement.getInstance().getPageBody();
+        }
+        if (pageBody !== undefined) {
+            // console.log('pageBody', pageBody);
+            pageBody.goToPage(page);
+        } else if (header !== undefined) {
+            pageBody = (<ComponentView>header.getFather()).pageBody;
+            // console.log('pageBody H', pageBody);
+            pageBody.goToPage(page);
+        }
+    }
+
     private init() {
         let _self = this;
         _self.tempObjectArray = new Array<any>();
@@ -454,30 +478,11 @@ export class UserManegement extends AppObject {
 
         _self.socketIo.emit('getDevices', {});
 
-        _self.socketIo.on('server', (stream) => {
+        _self.socketIo.on('server', (server) => {
+            _self.server = server;
             console.log('new SERVER');
             _self.goTo('stream');
         });
-    }
-
-    private goTo(page: string) {
-        let header;
-        let pageBody;
-        if (this !== undefined) {
-            header = this.getHeader();
-            pageBody = this.getPageBody();
-        } else {
-            header = UserManegement.getInstance().getHeader();
-            pageBody = UserManegement.getInstance().getPageBody();
-        }
-        if (pageBody !== undefined) {
-            // console.log('pageBody', pageBody);
-            pageBody.goToPage(page);
-        } else if (header !== undefined) {
-            pageBody = (<ComponentView>header.getFather()).pageBody;
-            // console.log('pageBody H', pageBody);
-            pageBody.goToPage(page);
-        }
     }
 
     private refreshHeader() {
