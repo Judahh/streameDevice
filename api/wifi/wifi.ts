@@ -7,17 +7,17 @@ export class Wifi implements Observer {
 
     private delay: number;
 
-    private handler: Handler;
+    // private handler: Handler;
 
     private lastWifi;
 
-    constructor(delay: number, handler: Handler) {
+    constructor(delay: number, handler?: Handler) {
         wifi.init();
         this.subscribers = new Array();
         this.delay = delay;
-        this.handler = handler;
+        // this.handler = handler;
         let _self = this;
-        this.handler.readOne('wifis', {}, _self.getLastWifi);
+        // this.handler.readOne('wifis', {}, _self.getLastWifi);
         this.signalStart();
     }
 
@@ -98,8 +98,8 @@ export class Wifi implements Observer {
             this.lastWifi = result;
             if (this.lastWifi === undefined) {
                 console.log('new lastWifi');
-                let event: Event = new Event(Operation.add, 'wifi', {});
-                this.handler.addEvent(event);
+                // let event: Event = new Event(Operation.add, 'wifi', {});
+                // this.handler.addEvent(event);
             }
             console.log('lastWifi', this.lastWifi);
         }
@@ -107,7 +107,7 @@ export class Wifi implements Observer {
 
     private updateLastWifi(lastWifi) {
         this.lastWifi = lastWifi;
-        let event: Event = new Event(Operation.update, 'wifi', this.lastWifi);
-        this.handler.addEvent(event);
+        // let event: Event = new Event(Operation.update, 'wifi', this.lastWifi);
+        // this.handler.addEvent(event);
     }
 }
