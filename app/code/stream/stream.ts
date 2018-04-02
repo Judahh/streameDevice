@@ -2,7 +2,7 @@ import { AppObject, Component } from 'backappjh';
 import { BasicSocket, UniqueSocket } from 'basicsocket';
 import { Disk } from './../disk/disk';
 import * as freeice from 'freeice';
-import * as adapter from 'webrtc-adapter';
+import 'webrtc-adapter';
 import { UserManegement } from '../user/userManegement';
 declare var MediaRecorder: any;
 declare var AudioContext: any;
