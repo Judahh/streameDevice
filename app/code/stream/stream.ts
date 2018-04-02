@@ -105,7 +105,9 @@ export class Stream extends AppObject {
                 // _self.startRecording();
             }).catch((error) => {
                 console.error(error);
-                _self.startVideo(oldVideo, oldAudio);
+                if (oldVideo !== video) {
+                    _self.startVideo(oldVideo, oldAudio);
+                }
             });
         } else {
             console.error('cam failed');
