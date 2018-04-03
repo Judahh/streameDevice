@@ -97,10 +97,10 @@ export class Stream extends AppObject {
         // console.log('New Video:', _self.video);
         // console.log('New Audio:', _self.audio);
         let constraints = { video: _self.video, audio: _self.audio };
-        console.log('New constraints:', constraints);
+        // console.log('New constraints:', constraints);
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
-                console.log('New Stream:', stream);
+                // console.log('New Stream:', stream);
                 _self.stream = stream;
                 // console.log(_self.stream);
                 // _self.configStream(stream);
