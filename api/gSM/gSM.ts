@@ -29,6 +29,9 @@ export class GSM implements Observer {
     this.subscribers = new Array();
     this.isStarted = false;
     this.portError = false;
+    if (delay === undefined || delay < 1000) {
+      delay = 1000;
+    }
     this.delay = delay;
     // this.handler = handler;
     let _self = this;
