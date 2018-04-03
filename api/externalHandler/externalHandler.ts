@@ -106,9 +106,9 @@ export class ExternalHandler extends BasicExternalHandler {
         let _self = this;
         basicSocket.on('getUptime', () => { _self.getUptime(basicSocket); });
 
-        basicSocket.on('uploadVideo', (video) => { _self.uploadVideo(video); });
-        basicSocket.on('getVideos', () => { _self.getVideos(); });
-        basicSocket.on('subscribeDisk', () => { _self.subscribeDisk(basicSocket); });
+        // basicSocket.on('uploadVideo', (video) => { _self.uploadVideo(video); });
+        // basicSocket.on('getVideos', () => { _self.getVideos(); });
+        // basicSocket.on('subscribeDisk', () => { _self.subscribeDisk(basicSocket); });
 
         // basicSocket.on('subscribeGPS', () => { _self.subscribeGPS(basicSocket); });
 

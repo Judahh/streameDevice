@@ -17,10 +17,10 @@ import { BasicHardwareHandler } from 'backapijh';
 
 export class HardwareHandler extends BasicHardwareHandler {
     private static identification: Identification = new Identification();
-    private gPS: GPS;
-    private gSM: GSM;
+    // private gPS: GPS;
+    // private gSM: GSM;
     private wifi: Wifi;
-    private disk: Disk;
+    // private disk: Disk;
     private parsers: Parsers;
     private handler: Handler;
     private appSubscribers: any;
@@ -49,7 +49,7 @@ export class HardwareHandler extends BasicHardwareHandler {
         // process.env.GSM_AT_COMMAND_SIGNAL, process.env.GSM_AT_COMMAND_TYPE,
         //  parseInt(process.env.GSM_AT_COMMAND_DELAY, 10), this.handler);
         this.wifi = new Wifi(parseInt(process.env.WIFI_REFRESH_DELAY, 10), this.handler);
-        this.disk = new Disk(this.handler);
+        // this.disk = new Disk(this.handler);
         // HANDLER SAMPLE
         // this.handler.addEvent(new Event(Operation.add, 'sample', 0));
         // this.handler.readArray('samples',(error, result: Array<any>)=>{});
@@ -109,21 +109,21 @@ export class HardwareHandler extends BasicHardwareHandler {
     //     socket.emit('users', users);
     // }
 
-    public getSpace() {
-        this.disk.getSpace();
-    }
+    // public getSpace() {
+    //     this.disk.getSpace();
+    // }
 
-    public checkVideos() {
-        return this.disk.checkVideos();
-    }
+    // public checkVideos() {
+    //     return this.disk.checkVideos();
+    // }
 
-    public getVideos() {
-        this.disk.getVideos();
-    }
+    // public getVideos() {
+    //     this.disk.getVideos();
+    // }
 
-    public uploadVideo(video) {
-        this.disk.uploadVideo(video);
-    }
+    // public uploadVideo(video) {
+    //     this.disk.uploadVideo(video);
+    // }
 
     public getWifiConnections() {
         this.wifi.scan();
@@ -137,26 +137,26 @@ export class HardwareHandler extends BasicHardwareHandler {
         this.wifi.connect(data);
     }
 
-    public subscribeDisk(callback) {
-        let _self = this;
-        this.disk.subscribe((data) => {
-            callback(data);
-        });
-    }
+    // public subscribeDisk(callback) {
+    //     let _self = this;
+    //     this.disk.subscribe((data) => {
+    //         callback(data);
+    //     });
+    // }
 
-    public subscribeGPS(callback) {
-        let _self = this;
-        this.gPS.subscribe((data) => {
-            callback(data);
-        });
-    }
+    // public subscribeGPS(callback) {
+    //     let _self = this;
+    //     this.gPS.subscribe((data) => {
+    //         callback(data);
+    //     });
+    // }
 
-    public subscribeGSM(callback) {
-        let _self = this;
-        this.gSM.subscribe((data) => {
-            callback(data);
-        });
-    }
+    // public subscribeGSM(callback) {
+    //     let _self = this;
+    //     this.gSM.subscribe((data) => {
+    //         callback(data);
+    //     });
+    // }
 
     public subscribeWifi(callback) {
         let _self = this;

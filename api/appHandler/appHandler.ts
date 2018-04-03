@@ -141,8 +141,8 @@ export class AppHandler extends BasicAppHandler {
             console.log('No such file or directory for VIDEOS');
         }
 
-        basicSocket.on('subscribeGPS', () => { _self.subscribeGPS(basicSocket); });
-        basicSocket.on('subscribeGSM', () => { _self.subscribeGSM(basicSocket); });
+        // basicSocket.on('subscribeGPS', () => { _self.subscribeGPS(basicSocket); });
+        // basicSocket.on('subscribeGSM', () => { _self.subscribeGSM(basicSocket); });
 
         basicSocket.on('checkIsOnline', () => { _self.checkIsOnline(basicSocket); });
 
