@@ -94,8 +94,8 @@ export class Stream extends AppObject {
         }
 
         // _self.streamRecorder.stop();
-        console.log('New Video:', _self.video);
-        console.log('New Audio:', _self.audio);
+        // console.log('New Video:', _self.video);
+        // console.log('New Audio:', _self.audio);
         let constraints = { video: _self.video, audio: _self.audio };
         console.log('New constraints:', constraints);
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {

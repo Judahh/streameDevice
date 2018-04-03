@@ -14,7 +14,7 @@
                     "height": 720,
                     "facingMode": "environment"
                 },
-                "audio": true,
+                "audio": false,
                 "duration": 0
             },
             "runFunction": "startVideo()",

@@ -1,8 +1,9 @@
-typings
 *.js
 *.map
 *.webm
 *.gz
+!*.json
+typings
 dist
 node_modules
 backApp
