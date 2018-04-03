@@ -110,9 +110,9 @@ export class ExternalHandler extends BasicExternalHandler {
         basicSocket.on('getVideos', () => { _self.getVideos(); });
         basicSocket.on('subscribeDisk', () => { _self.subscribeDisk(basicSocket); });
 
-        basicSocket.on('subscribeGPS', () => { _self.subscribeGPS(basicSocket); });
+        // basicSocket.on('subscribeGPS', () => { _self.subscribeGPS(basicSocket); });
 
-        basicSocket.on('subscribeGSM', () => { _self.subscribeGSM(basicSocket); });
+        // basicSocket.on('subscribeGSM', () => { _self.subscribeGSM(basicSocket); });
 
         basicSocket.on('checkIsOnline', () => { _self.checkIsOnline(basicSocket); });
 

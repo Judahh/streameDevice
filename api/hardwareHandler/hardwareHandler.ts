@@ -46,7 +46,8 @@ export class HardwareHandler extends BasicHardwareHandler {
         // this.parsers.getParser(process.env.GPS_AT_SERIAL_PORT), process.env.GPS_AT_COMMAND_INIT,
         // process.env.GPS_AT_COMMAND_START, this.handler);
         // this.gSM = new GSM(this.parsers.getParser(process.env.GSM_AT_SERIAL_PORT),
-        // process.env.GSM_AT_COMMAND_SIGNAL, process.env.GSM_AT_COMMAND_TYPE, parseInt(process.env.GSM_AT_COMMAND_DELAY, 10), this.handler);
+        // process.env.GSM_AT_COMMAND_SIGNAL, process.env.GSM_AT_COMMAND_TYPE,
+        //  parseInt(process.env.GSM_AT_COMMAND_DELAY, 10), this.handler);
         this.wifi = new Wifi(parseInt(process.env.WIFI_REFRESH_DELAY, 10), this.handler);
         this.disk = new Disk(this.handler);
         // HANDLER SAMPLE
