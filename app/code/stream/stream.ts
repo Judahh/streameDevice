@@ -96,8 +96,9 @@ export class Stream extends AppObject {
         // _self.streamRecorder.stop();
         console.log('New Video:', _self.video);
         console.log('New Audio:', _self.audio);
+        let constraints = { video: _self.video, audio: _self.audio };
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: _self.video, audio: _self.audio }).then((stream) => {
+            navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
                 console.log('New Stream:', stream);
                 _self.stream = stream;
                 // console.log(_self.stream);

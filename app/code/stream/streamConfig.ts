@@ -36,10 +36,42 @@ export class StreamConfig extends AppObject {
         stream.setDuration(parseInt(duration, 10));
         // stream.setAudio(audio);
         stream.setFormat(formatSelected);
+
+        let width: any = parseInt(array[0], 10);
+        let height: any = parseInt(array[1], 10);
+        let facingMode: any = facingModeSelected;
+        let widthHasExact = false;
+        let heightHasExact = false;
+        let facingModeHasExact = false;
+
+        if (stream.getVideo().width.exact !== undefined) {
+            widthHasExact = true;
+        }
+
+        if (stream.getVideo().height.exact !== undefined) {
+            heightHasExact = true;
+        }
+
+        if (stream.getVideo().facingMode.exact !== undefined) {
+            facingModeHasExact = true;
+        }
+
+        if (widthHasExact) {
+            width = { 'exact' : width };
+        }
+
+        if (heightHasExact) {
+            height = { 'exact' : height };
+        }
+
+        if (facingModeHasExact) {
+            facingMode = { 'exact' : facingMode };
+        }
+
         let video = {
-            'width': parseInt(array[0], 10),
-            'height': parseInt(array[1], 10),
-            'facingMode': facingModeSelected
+            'width': width,
+            'height': height,
+            'facingMode': facingMode
         };
         // console.log('video:', video);
         // console.log('duration:', duration);
@@ -72,8 +104,24 @@ export class StreamConfig extends AppObject {
         // console.log(stream);
 
         arrayField[3].value = '' + stream.getDuration();
-        let resolution = stream.getVideo().width + ' x ' + stream.getVideo().height;
+
+        let width = stream.getVideo().width;
+        let height = stream.getVideo().height;
         let facingMode = stream.getVideo().facingMode;
+
+        if (width.exact !== undefined) {
+            width = stream.getVideo().width.exact;
+        }
+
+        if (height.exact !== undefined) {
+            height = stream.getVideo().height.exact;
+        }
+
+        if (facingMode.exact !== undefined) {
+            facingMode = stream.getVideo().facingMode.exact;
+        }
+
+        let resolution = width + ' x ' + height;
         let format = stream.getFormat();
 
         // console.log('current: ' + resolution);
