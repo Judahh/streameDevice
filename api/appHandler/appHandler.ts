@@ -154,5 +154,12 @@ export class AppHandler extends BasicAppHandler {
             console.log('APP ASK TO CONNECT');
              _self.appPublish('connectToServer', data);
         });
+
+        basicSocket.on('checkServers', () => {
+            console.log('CHECK');
+             _self.appPublish('newApp', basicSocket);
+        });
+        // _self.appPublish('newApp', basicSocket);
+        // console.log('appPublish');
     }
 }

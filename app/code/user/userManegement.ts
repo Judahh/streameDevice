@@ -282,6 +282,10 @@ export class UserManegement extends AppObject {
         }
     }
 
+    public checkServers() {
+        this.socketIo.emit('checkServers', {});
+    }
+
     public logout(component?) {
         this.socketIo.emit('logoff', {});
         if (this !== undefined) {
@@ -439,6 +443,9 @@ export class UserManegement extends AppObject {
         return (this.server !== undefined);
     }
 
+    // public nop() {
+    // }
+
     public goTo(page: string) {
         let header;
         let pageBody;
@@ -483,6 +490,7 @@ export class UserManegement extends AppObject {
             console.log('new SERVER');
             _self.goTo('stream');
         });
+        // console.log('USER!!!');
     }
 
     private refreshHeader() {

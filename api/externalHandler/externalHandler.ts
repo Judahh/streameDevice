@@ -31,11 +31,16 @@ export class ExternalHandler extends BasicExternalHandler {
     }
 
     protected clientConnected(basicSocket) {
+        let _self = this;
         console.log('ID:', basicSocket.getIdentification());
         // console.log('CONNECTED');
         basicSocket.emit('subscribeStream', {});
         console.log('SERVER CONNECTED');
-        this.hardwareHandler.externalPublish('server', { server: basicSocket.getIdentification() });
+        _self.hardwareHandler.appSubscribe('newApp', (appBasicSocket) => {
+            console.log('NEW');
+            _self.hardwareHandler.externalPublish('server', { server: basicSocket.getIdentification() });
+        });
+        _self.hardwareHandler.externalPublish('server', { server: basicSocket.getIdentification() });
         // basicSocket.emit('subscribeUser', {});
         // basicSocket.emit('subscribeRemoveUser', {});
         // basicSocket.emit('subscribeUsers', {});

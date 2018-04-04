@@ -20,6 +20,11 @@
             },
             "runFunction": "startVideo()",
             "code": "Stream"
+        },
+        {
+            "name": "build",
+            "runFunction": "checkServers()",
+            "code": "UserManegement"
         }
     ],
     "arrayAppObject": [
