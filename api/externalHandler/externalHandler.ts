@@ -1,5 +1,6 @@
 import { path, BasicApi, BasicExternalHandler, BasicSocket } from 'backapijh';
 import { HardwareHandler } from '../hardwareHandler/hardwareHandler';
+import { Handler, Event, Operation } from 'flexiblepersistence';
 // import { compile } from 'morgan';
 
 export class ExternalHandler extends BasicExternalHandler {
@@ -11,8 +12,20 @@ export class ExternalHandler extends BasicExternalHandler {
 
     public init() {
         let _self = this;
+        let handler: Handler = _self.hardwareHandler.getHandler();
+        handler.readArray('server', {}, (error, data) => {
+            console.log(data);
+            for (let index = 0; index < data.length; index++) {
+                let element = JSON.parse(JSON.stringify(data[index]));
+                _self.connectToServer(element.address, HardwareHandler.getIdentification());
+            }
+            // console.log('element');
+        });
+
         this.hardwareHandler.appSubscribe('connectToServer', (data) => {
             console.log('START CONNECTION TO SERVER');
+            let event: Event = new Event(Operation.add, 'server', data);
+            handler.addEvent(event);
             _self.connectToServer(data.address, HardwareHandler.getIdentification());
         });
     }

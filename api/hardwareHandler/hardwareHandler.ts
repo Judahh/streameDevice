@@ -35,13 +35,11 @@ export class HardwareHandler extends BasicHardwareHandler {
         this.appSubscribers = {};
         this.externalSubscribers = {};
         this.parsers = Parsers.getInstance();
-        // let database = new Database(process.env.STREAME_READ_DB, process.env.STREAME_READ_DB_HOST,
-        //     parseInt(process.env.STREAME_READ_DB_PORT, 10), process.env.STREAME_DB,
-        //     process.env.STREAME_DB);
-        // let database2 = new Database(process.env.STREAME_EVENT_DB, process.env.STREAME_EVENT_DB_HOST,
-        //     parseInt(process.env.STREAME_EVENT_DB_PORT, 10), process.env.STREAME_DB,
-        //     process.env.STREAME_DB);
-        // this.handler = new Handler(database, database2);
+        let database = new Database(process.env.STREAME_READ_DB, process.env.STREAME_READ_DB_HOST,
+            parseInt(process.env.STREAME_READ_DB_PORT, 10));
+        let database2 = new Database(process.env.STREAME_EVENT_DB, process.env.STREAME_EVENT_DB_HOST,
+            parseInt(process.env.STREAME_EVENT_DB_PORT, 10));
+        this.handler = new Handler(database, database2);
         // this.gPS = new GPS(this.parsers.getParser(process.env.GPS_NMEA_SERIAL_PORT),
         // this.parsers.getParser(process.env.GPS_AT_SERIAL_PORT), process.env.GPS_AT_COMMAND_INIT,
         // process.env.GPS_AT_COMMAND_START, this.handler);
@@ -63,6 +61,9 @@ export class HardwareHandler extends BasicHardwareHandler {
         // }
     }
 
+    public getHandler() {
+        return this.handler;
+    }
     // tslint:disable-next-line:no-empty
     public init() { }
 
