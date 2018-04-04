@@ -10,7 +10,6 @@ import { Stream } from './../stream/stream';
 import { StreamConfig } from './../stream/streamConfig';
 import { Languages } from './../languages/Languages';
 import { Keyboard } from './../keyboard/keyboard';
-import { Operations } from './../operations/operations';
 import * as loader from './../onLoad/loader';
 // tslint:disable-next-line:no-empty
 try { require('./../../style/app.css'); } catch (e) { console.log('ERROR FONT'); };
@@ -22,15 +21,14 @@ w.FontAwesomeConfig = {
 
 export {
     loader,
-    SVG,
-    GPS, GPSData,
-    GSM,
+    // SVG,
+    // GPS, GPSData,
+    // GSM,
     Time,
     Wifi,
-    Disk,
+    // Disk,
     Stream, StreamConfig,
     Keyboard,
-    Operations,
     Languages,
     UserManegement
 };

@@ -15,7 +15,8 @@
                     "facingMode": "environment"
                 },
                 "audio": false,
-                "duration": 0
+                "duration": 0,
+                "delay": 1000
             },
             "runFunction": "startVideo()",
             "code": "Stream"

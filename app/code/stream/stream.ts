@@ -14,6 +14,7 @@ export class Stream extends AppObject {
     private video: any;
     private audio: boolean;
     private duration: number;
+    private delay: number;
     private disk: Disk;
     private streamRecorder;
     private socketIo: BasicSocket;
@@ -76,43 +77,64 @@ export class Stream extends AppObject {
     }
 
     public checkStream() {
-        if (this.stream === undefined) {
-            UserManegement.getInstance().goTo('cameraSettings');
+        let _self = this;
+        if (_self.checkLoaded) {
+            if (_self.stream === undefined) {
+                UserManegement.getInstance().goTo('cameraSettings');
+            }
+        } else {
+            let delay = 1000;
+            if (_self.delay !== undefined && _self.delay > 1000) {
+                delay = _self.delay;
+            }
+            let t = setTimeout(() => { _self.checkStream(); }, delay);
         }
+    }
+
+    public checkLoaded() {
+        return document.readyState === 'complete';
     }
 
     public startVideo(video?: any, audio?: boolean) {
         let _self = this;
-        let oldVideo = _self.video;
-        let oldAudio = _self.audio;
+        if (this.checkLoaded()) {
+            let oldVideo = _self.video;
+            let oldAudio = _self.audio;
 
-        if (video !== undefined) {
-            _self.video = video;
-        }
-        if (audio !== undefined) {
-            _self.audio = audio;
-        }
+            if (video !== undefined) {
+                _self.video = video;
+            }
+            if (audio !== undefined) {
+                _self.audio = audio;
+            }
 
-        // _self.streamRecorder.stop();
-        // console.log('New Video:', _self.video);
-        // console.log('New Audio:', _self.audio);
-        let constraints = { video: _self.video, audio: _self.audio };
-        // console.log('New constraints:', constraints);
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
-                // console.log('New Stream:', stream);
-                _self.stream = stream;
-                // console.log(_self.stream);
-                // _self.configStream(stream);
-                // _self.startRecording();
-            }).catch((error) => {
-                console.error(error);
-                if (oldVideo !== video) {
-                    _self.startVideo(oldVideo, oldAudio);
-                }
-            });
+            // _self.streamRecorder.stop();
+            // console.log('New Video:', _self.video);
+            // console.log('New Audio:', _self.audio);
+            let constraints = { video: _self.video, audio: _self.audio };
+            // console.log('New constraints:', constraints);
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
+                    // console.log('New Stream:', stream);
+                    _self.stream = stream;
+                    // console.log(_self.stream);
+                    // _self.configStream(stream);
+                    // _self.startRecording();
+                }).catch((error) => {
+                    console.error(error);
+                    if (oldVideo !== video) {
+                        _self.startVideo(oldVideo, oldAudio);
+                    }
+                });
+            } else {
+                console.error('cam failed');
+            }
         } else {
-            console.error('cam failed');
+            let delay = 1000;
+            if (_self.delay !== undefined && _self.delay > 1000) {
+                delay = _self.delay;
+            }
+            let t = setTimeout(() => { _self.startVideo(video, audio); }, delay);
         }
     }
 
@@ -177,8 +199,9 @@ export class Stream extends AppObject {
     }
 
     public streamView(component, stream) {
-        console.log('STREAMVIEW!!!', component);
-        (<any>(<Component>component).getElement()).src = window.URL.createObjectURL(stream);
+        console.log('STREAMVIEW!!!');
+        // (<any>(<Component>component).getElement()).src = window.URL.createObjectURL(stream);
+        (<any>(<Component>component).getElement()).srcObject = stream;
     }
 
     public startStream() {
@@ -192,9 +215,9 @@ export class Stream extends AppObject {
         _self.socketIo.emit('subscribeStream', {});
         _self.configuration = {
             'iceServers': [
-                { url: 'stun:stun.l.google.com:19302' },
-                { url: 'turn:71.6.135.115:3478', username: 'test', credential: 'tester' },
-                { url: 'turn:71.6.135.115:3479', username: 'test', credential: 'tester' }
+                { urls: 'stun:stun.l.google.com:19302' },
+                { urls: 'turn:71.6.135.115:3478', username: 'test', credential: 'tester' },
+                { urls: 'turn:71.6.135.115:3479', username: 'test', credential: 'tester' }
             ]
         };
         _self.streamConnection = new RTCPeerConnection(_self.configuration);

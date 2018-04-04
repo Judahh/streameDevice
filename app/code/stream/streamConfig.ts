@@ -132,7 +132,7 @@ export class StreamConfig extends AppObject {
         //     arrayField[4].click();
         // }
         arrayField[4].checked = stream.getAudio();
-        console.log('getAudio: ' + stream.getAudio());
+        // console.log('getAudio: ' + stream.getAudio());
 
         // _self.stream.setWifiConnection((data) => { _self.response(data); }, { ssid: resolutionSelected, password: password });
     }
