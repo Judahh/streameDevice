@@ -133,13 +133,13 @@ export class AppHandler extends BasicAppHandler {
         });
 
 
-        if (_self.checkVideos()) {
-            basicSocket.on('uploadVideo', (video) => { _self.uploadVideo(video); });
-            basicSocket.on('getVideos', () => { _self.getVideos(); });
-            basicSocket.on('subscribeDisk', () => { _self.subscribeDisk(basicSocket); });
-        } else {
-            console.log('No such file or directory for VIDEOS');
-        }
+        // if (_self.checkVideos()) {
+        //     basicSocket.on('uploadVideo', (video) => { _self.uploadVideo(video); });
+        //     basicSocket.on('getVideos', () => { _self.getVideos(); });
+        //     basicSocket.on('subscribeDisk', () => { _self.subscribeDisk(basicSocket); });
+        // } else {
+        //     console.log('No such file or directory for VIDEOS');
+        // }
 
         // basicSocket.on('subscribeGPS', () => { _self.subscribeGPS(basicSocket); });
         // basicSocket.on('subscribeGSM', () => { _self.subscribeGSM(basicSocket); });
