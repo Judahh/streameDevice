@@ -9,7 +9,7 @@
     "removeComments": false,
     "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": true,
-    "listEmittedFiles": true,
+    "listEmittedFiles": false,
     "allowJs": true,
     // "outDir": "../release",
     "typeRoots": [
