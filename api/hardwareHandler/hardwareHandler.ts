@@ -248,8 +248,8 @@ export class HardwareHandler extends BasicHardwareHandler {
 
         for (let index = 0; index < minA.length; index++) {
             color += this.getRandomColorPart(
-                parseInt('0x' + minA[index]),
-                parseInt('0x' + maxA[index]));
+                parseInt('0x' + minA[index], 10),
+                parseInt('0x' + maxA[index], 10));
         }
         return color;
     }

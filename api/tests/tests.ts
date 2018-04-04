@@ -6,10 +6,10 @@ require('dotenv').config();
 
 describe('HardwareHandler Class', () => {
     let hardwareHandler = new HardwareHandler();
-    it('disk.space should exist', () => {
-        hardwareHandler.subscribeDisk((disk) => {
-            expect(disk.space).to.exist(disk.space);
-        });
+    // it('disk.space should exist', () => {
+    //     hardwareHandler.subscribeDisk((disk) => {
+    //         expect(disk.space).to.exist(disk.space);
+    //     });
 
-    });
+    // });
 });
