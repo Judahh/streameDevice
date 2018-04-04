@@ -71,7 +71,7 @@
                                                     "opacity": "1",
                                                     "font-size": "20vw"
                                                 },
-                                                "className": "ClassPulse fas fa-wifi"
+                                                "className": "fas fa-wifi"
                                             }
                                         }
                                     ]
@@ -105,7 +105,7 @@
                                                     "opacity": "1",
                                                     "font-size": "20vw"
                                                 },
-                                                "className": "ClassPulse fas fa-camera"
+                                                "className": "fas fa-camera"
                                             }
                                         }
                                     ]
@@ -139,7 +139,7 @@
                                                     "opacity": "1",
                                                     "font-size": "20vw"
                                                 },
-                                                "className": "ClassPulse fas fa-language"
+                                                "className": "fas fa-language"
                                             }
                                         }
                                     ]

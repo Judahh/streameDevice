@@ -57,7 +57,7 @@
                                                     "padding": "5px",
                                                     "font-size": "30px"
                                                 },
-                                                "className": "ClassPulse fas fa-server"
+                                                "className": "fas fa-server"
                                             }
                                         }
                                     ]
@@ -107,7 +107,7 @@
                                                     "padding": "5px",
                                                     "font-size": "30px"
                                                 },
-                                                "className": "ClassPulse fas fa-camera"
+                                                "className": "fas fa-camera"
                                             }
                                         }
                                     ]
@@ -157,7 +157,7 @@
                                                     "padding": "5px",
                                                     "font-size": "30px"
                                                 },
-                                                "className": "ClassPulse fas fa-cog"
+                                                "className": "fas fa-cog"
                                             }
                                         }
                                     ]

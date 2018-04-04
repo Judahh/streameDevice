@@ -403,7 +403,7 @@
                                             },
                                             "animationEffect": {
                                                 "element": {
-                                                    "className": "ClassPulse"
+                                                    "className": ""
                                                 },
                                                 "animationSubEffect": {
                                                     "arrayAnimationSubEffectHolder": [
@@ -441,7 +441,7 @@
                                             },
                                             "animationEffect": {
                                                 "element": {
-                                                    "className": "ClassPulse"
+                                                    "className": ""
                                                 },
                                                 "animationSubEffect": {
                                                     "arrayAnimationSubEffectHolder": [
@@ -479,7 +479,7 @@
                                             },
                                             "animationEffect": {
                                                 "element": {
-                                                    "className": "ClassPulse"
+                                                    "className": ""
                                                 },
                                                 "animationSubEffect": {
                                                     "arrayAnimationSubEffectHolder": [
