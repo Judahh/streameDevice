@@ -31,6 +31,11 @@ If Raspberry Language Error:
 $ export LC_ALL="en_GB.UTF-8"
 $ export LANGUAGE="en_GB.UTF-8"
 ```
+If Raspberry WIFI Error:
+```sh
+sudo systemctl disable dhcpcd
+sudo systemctl stop dhcpcd
+```
 
 ### Project
 [https://github.com/creationix/nvm]
