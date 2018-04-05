@@ -21,10 +21,16 @@
 Fedora:
 ```sh
 $ sudo dnf install git git-all network-manager chromium-browser xinit mongodb ttf-mscorefonts-installer unclutter x11-xserver-utils mesa-vdpau-drivers
+$ sudo dnf update
+$ sudo dnf dist-upgrade
+$ sudo dnf upgrade
 ```
 Debian/Ubuntu:
 ```sh
 $ sudo apt-get install git git-all network-manager chromium-browser xinit mongodb ttf-mscorefonts-installer unclutter x11-xserver-utils  mesa-vdpau-drivers
+$ sudo apt-get update
+$ sudo apt-get dist-upgrade
+$ sudo apt-get upgrade
 ```
 If Raspberry Language Error:
 ```sh
