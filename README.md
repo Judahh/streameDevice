@@ -20,11 +20,11 @@
 ##### Linux
 Fedora:
 ```sh
-$ sudo dnf install git git-all network-manager chromium-browser xinit mongodb
+$ sudo dnf install git git-all network-manager chromium-browser xinit mongodb ttf-mscorefonts-installer unclutter x11-xserver-utils
 ```
 Debian/Ubuntu:
 ```sh
-$ sudo apt-get install git git-all network-manager chromium-browser xinit mongodb
+$ sudo apt-get install git git-all network-manager chromium-browser xinit mongodb ttf-mscorefonts-installer unclutter x11-xserver-utils
 ```
 If Raspberry Language Error:
 ```sh
