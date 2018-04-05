@@ -19,6 +19,5 @@ fi
 
 #Suppress Kernel Messages
 dmesg --console-off
-#cd /home/projects/HorusSoftware/
-#npm start
+
 exit 0
