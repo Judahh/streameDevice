@@ -59,7 +59,7 @@
     "basicsocket": "0.1.0",
     "chai": "^4.1.2",
     "compression-webpack-plugin": "1.1.11",
-    "css-loader": "0.28.10",
+    "css-loader": "3.5.3",
     "d3": "4.13.0",
     "diskusage": "0.2.4",
     "dotenv": "^5.0.1",
