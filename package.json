@@ -65,7 +65,7 @@
     "dotenv": "^5.0.1",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.11",
-    "flexiblepersistence": "1.0.17",
+    "flexiblepersistence": "1.5.1",
     "freeice": "^2.2.0",
     "gps": "0.4.3",
     "is-online": "7.0.0",
