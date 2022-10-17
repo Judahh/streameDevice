@@ -69,7 +69,7 @@
     "freeice": "^2.2.0",
     "gps": "0.4.3",
     "is-online": "7.0.0",
-    "mocha": "^5.0.4",
+    "mocha": "^10.1.0",
     "moment": "2.21.0",
     "node-wifi": "2.0.4",
     "os-uptime": "2.0.1",
